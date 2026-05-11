@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 import '../../../app/theme.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import '../../auth/state/auth_provider.dart';
+import '../../notifications/notifications_service.dart';
 import '../data/watchlist_repository.dart';
 
 /// Heart/star button users tap to watch a fixture. Renders an outlined star
@@ -51,6 +52,11 @@ class _WatchlistStarButtonState extends ConsumerState<WatchlistStarButton> {
         await repo.remove(widget.fixtureId);
       } else {
         await repo.add(widget.fixtureId);
+        // First-time add: ask for notification permission. We bypass the
+        // result here — the sync provider tries to schedule regardless and
+        // the OS silently denies if the user refused. Users can re-enable
+        // from system Settings later.
+        await NotificationsService.requestPermissionIfNeeded();
       }
       ref.invalidate(watchlistFixturesProvider);
     } on DioException catch (e) {

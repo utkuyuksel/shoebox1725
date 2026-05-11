@@ -93,5 +93,15 @@
   "commonGenericError": "Bu yüklenemedi",
   "commonNothingHere": "Henüz görüntülenecek bir şey yok.",
   "commonLive": "CANLI",
-  "commonFinalShort": "MS"
+  "commonFinalShort": "MS",
+
+  "onboarding1Title": "Maç öncesi araştırma, sade hâliyle",
+  "onboarding1Body": "Hit oranları, ev/deplasman, hakem örüntüleri — bahisçinin her maç öncesi baktığı veriler, tek ekranda.",
+  "onboarding2Title": "Ücretsiz + premium, adil şekilde",
+  "onboarding2Body": "Bir maçın premium bölümünü açmak için kısa bir reklam izle, ya da sınırsız erişim için yükselt.",
+  "onboarding3Title": "Listen ve hatırlatmaların",
+  "onboarding3Body": "Maçları kaydet, kickoff'tan 1 saat önce hatırlatalım. Giriş yaptığında cihazlar arasında senkronize olur.",
+  "onboardingNext": "Sonraki",
+  "onboardingDone": "Başla",
+  "onboardingSkip": "Atla"
 }

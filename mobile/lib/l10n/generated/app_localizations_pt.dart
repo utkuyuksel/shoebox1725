@@ -294,4 +294,34 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get commonFinalShort => 'FT';
+
+  @override
+  String get onboarding1Title => 'Pesquisa pré-jogo, simplificada';
+
+  @override
+  String get onboarding1Body =>
+      'Hit rates, splits, padrões do árbitro — os dados que o apostador sharp consulta antes de cada jogo, em uma tela.';
+
+  @override
+  String get onboarding2Title => 'Grátis + premium, de forma justa';
+
+  @override
+  String get onboarding2Body =>
+      'Assista a um anúncio curto para desbloquear uma seção premium em um jogo, ou atualize para acesso ilimitado.';
+
+  @override
+  String get onboarding3Title => 'Sua lista, seus alertas';
+
+  @override
+  String get onboarding3Body =>
+      'Salve partidas e avisaremos uma hora antes do início. Sincroniza entre dispositivos quando você entrar.';
+
+  @override
+  String get onboardingNext => 'Próximo';
+
+  @override
+  String get onboardingDone => 'Começar';
+
+  @override
+  String get onboardingSkip => 'Pular';
 }

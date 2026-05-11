@@ -14,6 +14,8 @@ import 'app/env.dart';
 import 'app/locale_provider.dart';
 import 'app/router.dart';
 import 'app/theme.dart';
+import 'features/notifications/notifications_service.dart';
+import 'features/notifications/watchlist_notifications_sync.dart';
 import 'features/paywall/data/ads_repository.dart';
 import 'features/paywall/data/billing_repository.dart';
 import 'features/paywall/state/premium_provider.dart';
@@ -33,6 +35,10 @@ Future<void> main() async {
 
   // SharedPreferences for the locale override (and future tiny settings).
   final prefs = await SharedPreferences.getInstance();
+
+  // Seed the router's onboarding flag before the first frame so a returning
+  // user goes straight to the shell instead of flashing the tour.
+  setOnboardingComplete(prefs.getBool('onboarding_completed') ?? false);
 
   // Supabase Auth — persists session to flutter_secure_storage and exposes
   // the singleton via Supabase.instance.client.
@@ -54,6 +60,10 @@ Future<void> main() async {
   // fine. Failures are non-fatal: AdsRepository.markReady stays false and
   // the rewarded-ad path is a no-op.
   unawaited(_configureAdMob());
+
+  // Local notifications init is cheap; no permission prompt yet — that's
+  // requested lazily the first time the user adds a match to their watchlist.
+  unawaited(NotificationsService.init());
 
   runApp(ProviderScope(
     overrides: [
@@ -96,6 +106,8 @@ class ShoeboxApp extends ConsumerWidget {
     // Keep premium status fresh — the provider eagerly listens to auth
     // changes and refreshes RC customer info.
     ref.watch(premiumStatusSyncProvider);
+    // Keep local kickoff-reminder notifications in sync with the watchlist.
+    ref.watch(watchlistNotificationsSyncProvider);
     final localeOverride = ref.watch(localeControllerProvider);
 
     return MaterialApp.router(

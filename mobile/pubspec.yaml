@@ -46,6 +46,10 @@ dependencies:
   # AdMob — rewarded ads for the hybrid paywall (Model B)
   google_mobile_ads: ^5.3.0
 
+  # Local notifications — kickoff reminders for watchlisted fixtures
+  flutter_local_notifications: ^18.0.1
+  timezone: ^0.10.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

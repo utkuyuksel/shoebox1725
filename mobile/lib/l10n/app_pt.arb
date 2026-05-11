@@ -93,5 +93,15 @@
   "commonGenericError": "Não foi possível carregar",
   "commonNothingHere": "Ainda não há nada para mostrar.",
   "commonLive": "AO VIVO",
-  "commonFinalShort": "FT"
+  "commonFinalShort": "FT",
+
+  "onboarding1Title": "Pesquisa pré-jogo, simplificada",
+  "onboarding1Body": "Hit rates, splits, padrões do árbitro — os dados que o apostador sharp consulta antes de cada jogo, em uma tela.",
+  "onboarding2Title": "Grátis + premium, de forma justa",
+  "onboarding2Body": "Assista a um anúncio curto para desbloquear uma seção premium em um jogo, ou atualize para acesso ilimitado.",
+  "onboarding3Title": "Sua lista, seus alertas",
+  "onboarding3Body": "Salve partidas e avisaremos uma hora antes do início. Sincroniza entre dispositivos quando você entrar.",
+  "onboardingNext": "Próximo",
+  "onboardingDone": "Começar",
+  "onboardingSkip": "Pular"
 }

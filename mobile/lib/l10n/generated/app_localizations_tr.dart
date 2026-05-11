@@ -293,4 +293,34 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get commonFinalShort => 'MS';
+
+  @override
+  String get onboarding1Title => 'Maç öncesi araştırma, sade hâliyle';
+
+  @override
+  String get onboarding1Body =>
+      'Hit oranları, ev/deplasman, hakem örüntüleri — bahisçinin her maç öncesi baktığı veriler, tek ekranda.';
+
+  @override
+  String get onboarding2Title => 'Ücretsiz + premium, adil şekilde';
+
+  @override
+  String get onboarding2Body =>
+      'Bir maçın premium bölümünü açmak için kısa bir reklam izle, ya da sınırsız erişim için yükselt.';
+
+  @override
+  String get onboarding3Title => 'Listen ve hatırlatmaların';
+
+  @override
+  String get onboarding3Body =>
+      'Maçları kaydet, kickoff\'tan 1 saat önce hatırlatalım. Giriş yaptığında cihazlar arasında senkronize olur.';
+
+  @override
+  String get onboardingNext => 'Sonraki';
+
+  @override
+  String get onboardingDone => 'Başla';
+
+  @override
+  String get onboardingSkip => 'Atla';
 }

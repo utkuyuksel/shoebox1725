@@ -7,6 +7,7 @@ import '../features/fixtures/data/fixture_dto.dart';
 import '../features/fixtures/presentation/fixtures_screen.dart';
 import '../features/leagues/presentation/home_screen.dart';
 import '../features/match/presentation/match_preview_screen.dart';
+import '../features/onboarding/presentation/onboarding_screen.dart';
 import '../features/paywall/presentation/paywall_screen.dart';
 import '../features/player/presentation/player_detail_screen.dart';
 import '../features/referee/presentation/referee_profile_screen.dart';
@@ -55,9 +56,28 @@ CustomTransitionPage<T> _fade<T>({required Widget child, required GoRouterState 
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 
+/// Flipped by [setOnboardingComplete] (called from the OnboardingController
+/// when the user finishes the tour, or set during boot from SharedPreferences).
+/// Read by GoRouter's `redirect` callback — when false, every navigation to
+/// the shell is rerouted to /onboarding so the first-launch tour is
+/// unavoidable. Kept as a module-level mutable boolean (not a Riverpod
+/// provider) because GoRouter's redirect signature is sync and can't await
+/// a provider read.
+bool _onboardingComplete = false;
+
+void setOnboardingComplete(bool v) {
+  _onboardingComplete = v;
+  appRouter.refresh();
+}
+
 final appRouter = GoRouter(
   navigatorKey: _rootNavigatorKey,
   initialLocation: '/',
+  redirect: (context, state) {
+    if (_onboardingComplete) return null;
+    if (state.matchedLocation == '/onboarding') return null;
+    return '/onboarding';
+  },
   routes: [
     // ── Shell: bottom nav over three branches ──────────────────────────
     StatefulShellRoute.indexedStack(
@@ -168,6 +188,11 @@ final appRouter = GoRouter(
       path: '/paywall',
       parentNavigatorKey: _rootNavigatorKey,
       pageBuilder: (c, s) => _slideFade(state: s, child: const PaywallScreen()),
+    ),
+    GoRoute(
+      path: '/onboarding',
+      parentNavigatorKey: _rootNavigatorKey,
+      pageBuilder: (c, s) => _slideFade(state: s, child: const OnboardingScreen()),
     ),
   ],
 );

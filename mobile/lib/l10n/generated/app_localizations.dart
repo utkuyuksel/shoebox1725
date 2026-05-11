@@ -611,6 +611,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'FT'**
   String get commonFinalShort;
+
+  /// No description provided for @onboarding1Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Pre-match research, simplified'**
+  String get onboarding1Title;
+
+  /// No description provided for @onboarding1Body.
+  ///
+  /// In en, this message translates to:
+  /// **'Hit rates, splits, referee patterns — the data sharp bettors look up before every match, on one screen.'**
+  String get onboarding1Body;
+
+  /// No description provided for @onboarding2Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Free + premium, fairly'**
+  String get onboarding2Title;
+
+  /// No description provided for @onboarding2Body.
+  ///
+  /// In en, this message translates to:
+  /// **'Watch a short ad to unlock any premium section for a match, or upgrade for unlimited access.'**
+  String get onboarding2Body;
+
+  /// No description provided for @onboarding3Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Your watchlist, your alerts'**
+  String get onboarding3Title;
+
+  /// No description provided for @onboarding3Body.
+  ///
+  /// In en, this message translates to:
+  /// **'Bookmark fixtures and we\'ll remind you an hour before kickoff. Syncs across devices once you sign in.'**
+  String get onboarding3Body;
+
+  /// No description provided for @onboardingNext.
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get onboardingNext;
+
+  /// No description provided for @onboardingDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Get started'**
+  String get onboardingDone;
+
+  /// No description provided for @onboardingSkip.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip'**
+  String get onboardingSkip;
 }
 
 class _AppLocalizationsDelegate

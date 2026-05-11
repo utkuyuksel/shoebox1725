@@ -100,5 +100,15 @@
   "commonGenericError": "Couldn't load this",
   "commonNothingHere": "Nothing to show yet.",
   "commonLive": "LIVE",
-  "commonFinalShort": "FT"
+  "commonFinalShort": "FT",
+
+  "onboarding1Title": "Pre-match research, simplified",
+  "onboarding1Body": "Hit rates, splits, referee patterns — the data sharp bettors look up before every match, on one screen.",
+  "onboarding2Title": "Free + premium, fairly",
+  "onboarding2Body": "Watch a short ad to unlock any premium section for a match, or upgrade for unlimited access.",
+  "onboarding3Title": "Your watchlist, your alerts",
+  "onboarding3Body": "Bookmark fixtures and we'll remind you an hour before kickoff. Syncs across devices once you sign in.",
+  "onboardingNext": "Next",
+  "onboardingDone": "Get started",
+  "onboardingSkip": "Skip"
 }

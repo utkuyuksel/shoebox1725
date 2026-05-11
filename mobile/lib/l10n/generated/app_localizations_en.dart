@@ -293,4 +293,34 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get commonFinalShort => 'FT';
+
+  @override
+  String get onboarding1Title => 'Pre-match research, simplified';
+
+  @override
+  String get onboarding1Body =>
+      'Hit rates, splits, referee patterns — the data sharp bettors look up before every match, on one screen.';
+
+  @override
+  String get onboarding2Title => 'Free + premium, fairly';
+
+  @override
+  String get onboarding2Body =>
+      'Watch a short ad to unlock any premium section for a match, or upgrade for unlimited access.';
+
+  @override
+  String get onboarding3Title => 'Your watchlist, your alerts';
+
+  @override
+  String get onboarding3Body =>
+      'Bookmark fixtures and we\'ll remind you an hour before kickoff. Syncs across devices once you sign in.';
+
+  @override
+  String get onboardingNext => 'Next';
+
+  @override
+  String get onboardingDone => 'Get started';
+
+  @override
+  String get onboardingSkip => 'Skip';
 }
