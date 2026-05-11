@@ -1,0 +1,50 @@
+name: shoebox_mobile
+description: "Shoebox — Pre-match stats for serious bettors."
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.10.1
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # State management
+  flutter_riverpod: ^2.6.1
+
+  # Networking
+  dio: ^5.7.0
+
+  # Routing
+  go_router: ^14.6.2
+
+  # Charts
+  fl_chart: ^0.69.2
+
+  # UI helpers
+  cached_network_image: ^3.4.1
+  google_fonts: ^6.2.1
+  cupertino_icons: ^1.0.8
+
+  # Date formatting
+  intl: ^0.19.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^6.0.0
+  flutter_launcher_icons: ^0.14.4
+
+flutter:
+  uses-material-design: true
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  remove_alpha_ios: true
+  image_path: "assets/icon/app_icon.png"
+  # iOS dark mode + tinted variants (iOS 18 supports these; ignored on older)
+  image_path_ios_dark_transparent: "assets/icon/app_icon.png"

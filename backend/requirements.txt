@@ -1,0 +1,27 @@
+# --- Web framework ---
+fastapi==0.115.0
+uvicorn[standard]==0.32.0
+
+# --- Database ---
+sqlalchemy[asyncio]==2.0.36
+asyncpg==0.30.0
+alembic==1.13.3
+
+# --- Cache / queue ---
+redis[hiredis]==5.2.0
+httpx==0.28.1                       # async HTTP for QStash and api-sports
+
+# --- Auth (Supabase JWT) ---
+pyjwt[crypto]==2.10.0
+
+# --- Config / utilities ---
+python-dotenv==1.0.1
+pydantic==2.10.0
+pydantic-settings==2.7.0
+
+# --- Observability ---
+sentry-sdk[fastapi]==2.18.0
+structlog==24.4.0
+
+# --- Misc ---
+python-dateutil==2.9.0

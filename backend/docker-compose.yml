@@ -1,0 +1,46 @@
+# Local dev — Postgres + Redis. Production uses Neon + Upstash, not this.
+#
+#   docker compose up -d
+#   alembic upgrade head
+#   uvicorn app.main:app --reload
+#
+# The postgres container runs init.sql once on first boot to create extensions.
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: shoebox-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: shoebox_db
+    ports:
+      - "5433:5432"   # host 5433 → container 5432 (avoids clash with native Postgres on host)
+    volumes:
+      - shoebox_pgdata:/var/lib/postgresql/data
+      - ./app/db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d shoebox_db"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    container_name: shoebox-redis
+    restart: unless-stopped
+    command: ["redis-server", "--appendonly", "yes"]
+    ports:
+      - "6380:6379"   # host 6380 → container 6379 (avoids clash with native redis on host)
+    volumes:
+      - shoebox_redisdata:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+volumes:
+  shoebox_pgdata:
+  shoebox_redisdata:

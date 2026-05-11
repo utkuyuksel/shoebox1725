@@ -1,0 +1,20 @@
+Python cache dosyaları
+
+pycache/
+*.pyc
+
+Sanal ortam klasörü (eğer kullanıyorsanız)
+
+venv/
+.venv/
+
+YENİ: Log dosyaları
+
+logs/
+*.log
+*.jsonl
+
+IDE/Editör ayar dosyaları
+
+.vscode/
+.idea/

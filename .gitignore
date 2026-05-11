@@ -1,0 +1,88 @@
+# ─── OS / IDE ──────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.iml
+*.swp
+
+# ─── Secrets (NEVER commit) ────────────────────────────────────────────
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# Telegram bot has its bot token hardcoded in config.py.
+# We exclude it; ship a config.example.py instead.
+telegram-bot/config.py
+
+# ─── Python (backend + telegram-bot) ───────────────────────────────────
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+
+# ─── Logs ──────────────────────────────────────────────────────────────
+*.log
+*.jsonl
+logs/
+
+# ─── Flutter / Dart (mobile) ───────────────────────────────────────────
+mobile/.dart_tool/
+mobile/.flutter-plugins
+mobile/.flutter-plugins-dependencies
+mobile/.packages
+mobile/build/
+mobile/coverage/
+mobile/flutter_*.log
+
+# iOS
+mobile/ios/Pods/
+mobile/ios/.symlinks/
+mobile/ios/Flutter/Flutter.framework
+mobile/ios/Flutter/Flutter.podspec
+mobile/ios/Flutter/Generated.xcconfig
+mobile/ios/Flutter/flutter_export_environment.sh
+mobile/ios/Flutter/ephemeral/
+mobile/ios/Runner/GeneratedPluginRegistrant.h
+mobile/ios/Runner/GeneratedPluginRegistrant.m
+mobile/ios/Runner.xcworkspace/xcuserdata/
+mobile/ios/Runner.xcodeproj/xcuserdata/
+mobile/ios/Runner.xcodeproj/project.xcworkspace/xcuserdata/
+
+# Android
+mobile/android/.gradle/
+mobile/android/captures/
+mobile/android/gradlew
+mobile/android/gradlew.bat
+mobile/android/local.properties
+mobile/android/**/GeneratedPluginRegistrant.java
+mobile/android/key.properties
+mobile/android/key.jks
+mobile/android/app/release/
+
+# macOS / Linux / Windows desktop builds
+mobile/macos/Pods/
+mobile/macos/Flutter/ephemeral/
+mobile/macos/Flutter/Flutter-Generated.xcconfig
+mobile/macos/Flutter/GeneratedPluginRegistrant.swift
+mobile/linux/flutter/ephemeral/
+mobile/windows/flutter/ephemeral/
+
+# Web
+mobile/web/main.dart.js
+mobile/web/main.dart.js.map
+mobile/web/main.dart.js.deps
+
+# ─── Backend cache / migration cache ───────────────────────────────────
+backend/migrations/versions/__pycache__/
+
+# ─── Misc developer scratch ────────────────────────────────────────────
+*.bak
+*.tmp
+/tmp/
