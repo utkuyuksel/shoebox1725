@@ -66,6 +66,10 @@ flutter_launcher_icons:
 flutter_native_splash:
   color: "#0B1220"
   image: "assets/icon/splash_logo.png"
+  # iOS: render the logo at ~30% of the screen width on every device
+  # (LaunchImage is centred at its native size, so we pick a value that
+  # reads well on the smallest supported screen).
+  ios_content_mode: center
   android_12:
     color: "#0B1220"
     image: "assets/icon/splash_logo.png"

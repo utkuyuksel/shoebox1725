@@ -18,7 +18,7 @@ from PIL import Image, ImageDraw, ImageFilter
 OUT_DIR = os.path.join(os.path.dirname(__file__), "..", "assets", "icon")
 OUT_PATH = os.path.join(OUT_DIR, "splash_logo.png")
 
-SIZE = 512                       # native-splash recommended logo source
+SIZE = 1024                      # bigger source = bigger rendered splash logo
 ACCENT = (79, 141, 255)          # ShoeboxColors.accent
 
 
