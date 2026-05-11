@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../app/theme.dart';
 import '../../../../core/widgets/section_card.dart';
+import '../../../../l10n/generated/app_localizations.dart';
 import '../../data/match_preview_dto.dart';
 
 class HitRateCard extends StatelessWidget {
@@ -33,7 +34,7 @@ class HitRateCard extends StatelessWidget {
     ];
 
     return SectionCard(
-      title: 'Hit rate · season',
+      title: AppLocalizations.of(context).matchSectionHitRate,
       trailing: Text(
         '${home?.matches ?? 0} vs ${away?.matches ?? 0} games',
         style: Theme.of(context).textTheme.labelSmall?.copyWith(color: ShoeboxColors.textMid),

@@ -323,4 +323,75 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get onboardingSkip => 'Atla';
+
+  @override
+  String get matchSectionSeasonAverages => 'Sezon ortalamaları';
+
+  @override
+  String get matchSectionHitRate => 'Hit oranı · sezon';
+
+  @override
+  String get matchSectionRadar => 'Form profili';
+
+  @override
+  String get matchSectionReferee => 'Hakem · geçmiş';
+
+  @override
+  String get matchRefereeNoHistory => 'Geçmiş yok';
+
+  @override
+  String matchTrendCardTitle(String teamLabel, int n) {
+    return '$teamLabel · son $n maç';
+  }
+
+  @override
+  String matchTrendSeasonAvg(String avg) {
+    return 'Sezon ort: $avg maç başına';
+  }
+
+  @override
+  String get matchTrendNoData => 'Bu metrik için veri yok.';
+
+  @override
+  String get metricGoalsFor => 'Atılan gol';
+
+  @override
+  String get metricGoalsAgainst => 'Yenilen gol';
+
+  @override
+  String get metricCorners => 'Korner';
+
+  @override
+  String get metricYellowCards => 'Sarı kart';
+
+  @override
+  String get metricShots => 'Şut';
+
+  @override
+  String get metricPoints => 'Sayı';
+
+  @override
+  String get metricPointsAllowed => 'Yenilen sayı';
+
+  @override
+  String get metricRebounds => 'Ribaund';
+
+  @override
+  String get metricAssists => 'Asist';
+
+  @override
+  String get metricThreesMade => 'Üçlük';
+
+  @override
+  String get settingsNotificationsToggle => 'Sistem bildirim ayarlarını aç';
+
+  @override
+  String get settingsNotificationsSubtitle => 'Maç hatırlatmalarını yönet';
+
+  @override
+  String get settingsShowOnboarding => 'Karşılama turunu tekrar oynat';
+
+  @override
+  String get settingsShowOnboardingSubtitle =>
+      '3 ekranlık tanıtımı yeniden gör';
 }

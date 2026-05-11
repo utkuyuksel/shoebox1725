@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../app/theme.dart';
 import '../../../../core/widgets/section_card.dart';
+import '../../../../l10n/generated/app_localizations.dart';
 import '../../data/match_preview_dto.dart';
 
 /// Basketball season averages — different metrics than football. Grouped by
@@ -51,7 +52,7 @@ class BasketballAveragesCard extends StatelessWidget {
     ];
 
     return SectionCard(
-      title: 'Season averages',
+      title: AppLocalizations.of(context).matchSectionSeasonAverages,
       trailing: Text(
         '${home?.played ?? 0} vs ${away?.played ?? 0} games',
         style: Theme.of(context).textTheme.labelSmall?.copyWith(color: ShoeboxColors.textMid),

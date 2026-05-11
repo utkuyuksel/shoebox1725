@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../app/theme.dart';
 import '../../../../core/widgets/section_card.dart';
+import '../../../../l10n/generated/app_localizations.dart';
 import '../../data/match_preview_dto.dart';
 
 /// Renders the "last N matches" trend for one team across multiple metrics.
@@ -35,27 +36,32 @@ class _TrendCardState extends State<TrendCard> {
     );
   }
 
-  static const _labels = {
-    // Football metrics
-    'goals_for':     'Goals for',
-    'goals_against': 'Goals against',
-    'corners':       'Corners',
-    'yellow_cards':  'Yellow cards',
-    'shots_total':   'Shots',
-    // Basketball metrics
-    'points':          'Points',
-    'points_allowed':  'Points allowed',
-    'rebounds_total':  'Rebounds',
-    'assists':         'Assists',
-    'three_made':      '3-pointers made',
-  };
+  /// Maps the metric slug coming from the backend to a localised label.
+  /// Falls back to the slug itself if a translation isn't defined yet.
+  String _metricLabel(BuildContext context, String slug) {
+    final l = AppLocalizations.of(context);
+    switch (slug) {
+      case 'goals_for':     return l.metricGoalsFor;
+      case 'goals_against': return l.metricGoalsAgainst;
+      case 'corners':       return l.metricCorners;
+      case 'yellow_cards':  return l.metricYellowCards;
+      case 'shots_total':   return l.metricShots;
+      case 'points':          return l.metricPoints;
+      case 'points_allowed':  return l.metricPointsAllowed;
+      case 'rebounds_total':  return l.metricRebounds;
+      case 'assists':         return l.metricAssists;
+      case 'three_made':      return l.metricThreesMade;
+    }
+    return slug;
+  }
 
   @override
   Widget build(BuildContext context) {
     if (widget.series.isEmpty) return const SizedBox.shrink();
+    final l = AppLocalizations.of(context);
 
     return SectionCard(
-      title: '${widget.teamLabel} · last ${_selected.values.length} matches',
+      title: l.matchTrendCardTitle(widget.teamLabel, _selected.values.length),
       trailing: Container(
         width: 8, height: 8,
         decoration: BoxDecoration(color: widget.accent, shape: BoxShape.circle),
@@ -73,7 +79,7 @@ class _TrendCardState extends State<TrendCard> {
                 final s = widget.series[i];
                 final selected = s.metric == _selected.metric;
                 return ChoiceChip(
-                  label: Text(_labels[s.metric] ?? s.metric),
+                  label: Text(_metricLabel(context, s.metric)),
                   selected: selected,
                   onSelected: (_) => setState(() => _selected = s),
                   selectedColor: widget.accent.withValues(alpha: 0.2),
@@ -94,7 +100,7 @@ class _TrendCardState extends State<TrendCard> {
           const SizedBox(height: 6),
           if (_selected.seasonAvg != null)
             Text(
-              'Season avg: ${_selected.seasonAvg!.toStringAsFixed(1)} per game',
+              l.matchTrendSeasonAvg(_selected.seasonAvg!.toStringAsFixed(1)),
               style: Theme.of(context).textTheme.labelSmall?.copyWith(color: ShoeboxColors.textMid),
             ),
         ],
@@ -113,7 +119,7 @@ class _TrendChart extends StatelessWidget {
     if (series.values.isEmpty) {
       return Center(
         child: Text(
-          'No data for this metric.',
+          AppLocalizations.of(context).matchTrendNoData,
           style: Theme.of(context).textTheme.bodySmall?.copyWith(color: ShoeboxColors.textMid),
         ),
       );

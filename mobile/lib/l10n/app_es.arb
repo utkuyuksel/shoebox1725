@@ -103,5 +103,29 @@
   "onboarding3Body": "Guarda partidos y te avisaremos una hora antes del pitido inicial. Sincroniza entre dispositivos al iniciar sesión.",
   "onboardingNext": "Siguiente",
   "onboardingDone": "Empezar",
-  "onboardingSkip": "Saltar"
+  "onboardingSkip": "Saltar",
+
+  "matchSectionSeasonAverages": "Promedios de temporada",
+  "matchSectionHitRate": "Hit rate · temporada",
+  "matchSectionRadar": "Perfil de forma",
+  "matchSectionReferee": "Árbitro · historial",
+  "matchRefereeNoHistory": "Sin historial",
+  "matchTrendCardTitle": "{teamLabel} · últimos {n} partidos",
+  "matchTrendSeasonAvg": "Promedio temporada: {avg} por partido",
+  "matchTrendNoData": "Sin datos para esta métrica.",
+  "metricGoalsFor": "Goles a favor",
+  "metricGoalsAgainst": "Goles en contra",
+  "metricCorners": "Córners",
+  "metricYellowCards": "Tarjetas amarillas",
+  "metricShots": "Disparos",
+  "metricPoints": "Puntos",
+  "metricPointsAllowed": "Puntos recibidos",
+  "metricRebounds": "Rebotes",
+  "metricAssists": "Asistencias",
+  "metricThreesMade": "Triples",
+
+  "settingsNotificationsToggle": "Abrir ajustes de notificaciones",
+  "settingsNotificationsSubtitle": "Gestiona los recordatorios",
+  "settingsShowOnboarding": "Ver tutorial de nuevo",
+  "settingsShowOnboardingSubtitle": "Repite la intro de 3 pantallas"
 }

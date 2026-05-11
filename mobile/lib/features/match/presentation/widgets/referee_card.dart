@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../app/theme.dart';
 import '../../../../core/widgets/section_card.dart';
+import '../../../../l10n/generated/app_localizations.dart';
 import '../../data/match_preview_dto.dart';
 
 class RefereeCard extends StatelessWidget {
@@ -18,7 +19,7 @@ class RefereeCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SectionCard(
-      title: 'Referee · history',
+      title: AppLocalizations.of(context).matchSectionReferee,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -85,7 +86,7 @@ class _TeamHistory extends StatelessWidget {
             Container(width: 8, height: 8, decoration: BoxDecoration(color: accent, shape: BoxShape.circle)),
             const SizedBox(width: 10),
             Expanded(child: Text(label, style: Theme.of(context).textTheme.bodyMedium)),
-            Text('No history',
+            Text(AppLocalizations.of(context).matchRefereeNoHistory,
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(color: ShoeboxColors.textLow)),
           ],
         ),

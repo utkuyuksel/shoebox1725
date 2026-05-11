@@ -323,4 +323,74 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get onboardingSkip => 'Skip';
+
+  @override
+  String get matchSectionSeasonAverages => 'Season averages';
+
+  @override
+  String get matchSectionHitRate => 'Hit rate · season';
+
+  @override
+  String get matchSectionRadar => 'Form fingerprint';
+
+  @override
+  String get matchSectionReferee => 'Referee · history';
+
+  @override
+  String get matchRefereeNoHistory => 'No history';
+
+  @override
+  String matchTrendCardTitle(String teamLabel, int n) {
+    return '$teamLabel · last $n matches';
+  }
+
+  @override
+  String matchTrendSeasonAvg(String avg) {
+    return 'Season avg: $avg per game';
+  }
+
+  @override
+  String get matchTrendNoData => 'No data for this metric.';
+
+  @override
+  String get metricGoalsFor => 'Goals for';
+
+  @override
+  String get metricGoalsAgainst => 'Goals against';
+
+  @override
+  String get metricCorners => 'Corners';
+
+  @override
+  String get metricYellowCards => 'Yellow cards';
+
+  @override
+  String get metricShots => 'Shots';
+
+  @override
+  String get metricPoints => 'Points';
+
+  @override
+  String get metricPointsAllowed => 'Points allowed';
+
+  @override
+  String get metricRebounds => 'Rebounds';
+
+  @override
+  String get metricAssists => 'Assists';
+
+  @override
+  String get metricThreesMade => '3-pointers made';
+
+  @override
+  String get settingsNotificationsToggle => 'Open system Notification settings';
+
+  @override
+  String get settingsNotificationsSubtitle => 'Manage kickoff reminders';
+
+  @override
+  String get settingsShowOnboarding => 'Replay the welcome tour';
+
+  @override
+  String get settingsShowOnboardingSubtitle => 'See the 3-screen intro again';
 }

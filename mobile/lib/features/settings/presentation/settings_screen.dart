@@ -1,13 +1,17 @@
+import 'dart:io' show Platform;
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../app/locale_provider.dart';
 import '../../../app/theme.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import '../../auth/data/auth_repository.dart';
 import '../../auth/state/auth_provider.dart';
+import '../../onboarding/state/onboarding_provider.dart';
 import '../../paywall/state/premium_provider.dart';
 
 class SettingsScreen extends ConsumerWidget {
@@ -68,6 +72,15 @@ class SettingsScreen extends ConsumerWidget {
             _LanguageTile(current: locale, l: l),
           ]),
           const SizedBox(height: 16),
+          _Section(title: 'Notifications', children: [
+            _Tile(
+              icon: Icons.notifications_active_outlined,
+              title: l.settingsNotificationsToggle,
+              subtitle: l.settingsNotificationsSubtitle,
+              onTap: () => _openSystemNotificationSettings(context),
+            ),
+          ]),
+          const SizedBox(height: 16),
           _Section(title: l.settingsSectionAbout, children: [
             _Tile(
               icon: Icons.info_outline_rounded,
@@ -75,10 +88,41 @@ class SettingsScreen extends ConsumerWidget {
               subtitle: l.settingsAboutVersion('0.2.0'),
               onTap: null,
             ),
+            _Tile(
+              icon: Icons.replay_rounded,
+              title: l.settingsShowOnboarding,
+              subtitle: l.settingsShowOnboardingSubtitle,
+              onTap: () => _replayOnboarding(context, ref),
+            ),
           ]),
         ],
       ),
     );
+  }
+
+  Future<void> _openSystemNotificationSettings(BuildContext context) async {
+    HapticFeedback.selectionClick();
+    // iOS: `app-settings:` deep-links into the app's settings page (which
+    // includes the notifications toggle). Android: there's no equivalent
+    // URL scheme, but launching `package:` lands on the app's settings page.
+    final uri = Platform.isIOS
+        ? Uri.parse('app-settings:')
+        : Uri.parse('package:'); // Falls back to OS handler
+    try {
+      await launchUrl(uri);
+    } catch (e) {
+      if (!context.mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Open Settings → Notifications manually.')),
+      );
+    }
+  }
+
+  Future<void> _replayOnboarding(BuildContext context, WidgetRef ref) async {
+    HapticFeedback.selectionClick();
+    await ref.read(onboardingControllerProvider.notifier).reset();
+    if (!context.mounted) return;
+    context.go('/onboarding');
   }
 
   Future<void> _confirmSignOut(BuildContext context, WidgetRef ref) async {

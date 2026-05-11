@@ -110,5 +110,36 @@
   "onboarding3Body": "Bookmark fixtures and we'll remind you an hour before kickoff. Syncs across devices once you sign in.",
   "onboardingNext": "Next",
   "onboardingDone": "Get started",
-  "onboardingSkip": "Skip"
+  "onboardingSkip": "Skip",
+
+  "matchSectionSeasonAverages": "Season averages",
+  "matchSectionHitRate": "Hit rate · season",
+  "matchSectionRadar": "Form fingerprint",
+  "matchSectionReferee": "Referee · history",
+  "matchRefereeNoHistory": "No history",
+  "matchTrendCardTitle": "{teamLabel} · last {n} matches",
+  "@matchTrendCardTitle": {
+    "placeholders": {
+      "teamLabel": {"type": "String"},
+      "n": {"type": "int"}
+    }
+  },
+  "matchTrendSeasonAvg": "Season avg: {avg} per game",
+  "@matchTrendSeasonAvg": { "placeholders": { "avg": { "type": "String" } } },
+  "matchTrendNoData": "No data for this metric.",
+  "metricGoalsFor": "Goals for",
+  "metricGoalsAgainst": "Goals against",
+  "metricCorners": "Corners",
+  "metricYellowCards": "Yellow cards",
+  "metricShots": "Shots",
+  "metricPoints": "Points",
+  "metricPointsAllowed": "Points allowed",
+  "metricRebounds": "Rebounds",
+  "metricAssists": "Assists",
+  "metricThreesMade": "3-pointers made",
+
+  "settingsNotificationsToggle": "Open system Notification settings",
+  "settingsNotificationsSubtitle": "Manage kickoff reminders",
+  "settingsShowOnboarding": "Replay the welcome tour",
+  "settingsShowOnboardingSubtitle": "See the 3-screen intro again"
 }

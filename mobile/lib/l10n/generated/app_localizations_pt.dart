@@ -324,4 +324,74 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get onboardingSkip => 'Pular';
+
+  @override
+  String get matchSectionSeasonAverages => 'Médias da temporada';
+
+  @override
+  String get matchSectionHitRate => 'Hit rate · temporada';
+
+  @override
+  String get matchSectionRadar => 'Perfil de forma';
+
+  @override
+  String get matchSectionReferee => 'Árbitro · histórico';
+
+  @override
+  String get matchRefereeNoHistory => 'Sem histórico';
+
+  @override
+  String matchTrendCardTitle(String teamLabel, int n) {
+    return '$teamLabel · últimos $n jogos';
+  }
+
+  @override
+  String matchTrendSeasonAvg(String avg) {
+    return 'Média temporada: $avg por jogo';
+  }
+
+  @override
+  String get matchTrendNoData => 'Sem dados para esta métrica.';
+
+  @override
+  String get metricGoalsFor => 'Gols a favor';
+
+  @override
+  String get metricGoalsAgainst => 'Gols sofridos';
+
+  @override
+  String get metricCorners => 'Escanteios';
+
+  @override
+  String get metricYellowCards => 'Cartões amarelos';
+
+  @override
+  String get metricShots => 'Chutes';
+
+  @override
+  String get metricPoints => 'Pontos';
+
+  @override
+  String get metricPointsAllowed => 'Pontos sofridos';
+
+  @override
+  String get metricRebounds => 'Rebotes';
+
+  @override
+  String get metricAssists => 'Assistências';
+
+  @override
+  String get metricThreesMade => 'Cestas de 3';
+
+  @override
+  String get settingsNotificationsToggle => 'Abrir ajustes de notificações';
+
+  @override
+  String get settingsNotificationsSubtitle => 'Gerencie os lembretes';
+
+  @override
+  String get settingsShowOnboarding => 'Ver tour de boas-vindas';
+
+  @override
+  String get settingsShowOnboardingSubtitle => 'Reveja a intro de 3 telas';
 }

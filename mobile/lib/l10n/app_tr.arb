@@ -103,5 +103,29 @@
   "onboarding3Body": "Maçları kaydet, kickoff'tan 1 saat önce hatırlatalım. Giriş yaptığında cihazlar arasında senkronize olur.",
   "onboardingNext": "Sonraki",
   "onboardingDone": "Başla",
-  "onboardingSkip": "Atla"
+  "onboardingSkip": "Atla",
+
+  "matchSectionSeasonAverages": "Sezon ortalamaları",
+  "matchSectionHitRate": "Hit oranı · sezon",
+  "matchSectionRadar": "Form profili",
+  "matchSectionReferee": "Hakem · geçmiş",
+  "matchRefereeNoHistory": "Geçmiş yok",
+  "matchTrendCardTitle": "{teamLabel} · son {n} maç",
+  "matchTrendSeasonAvg": "Sezon ort: {avg} maç başına",
+  "matchTrendNoData": "Bu metrik için veri yok.",
+  "metricGoalsFor": "Atılan gol",
+  "metricGoalsAgainst": "Yenilen gol",
+  "metricCorners": "Korner",
+  "metricYellowCards": "Sarı kart",
+  "metricShots": "Şut",
+  "metricPoints": "Sayı",
+  "metricPointsAllowed": "Yenilen sayı",
+  "metricRebounds": "Ribaund",
+  "metricAssists": "Asist",
+  "metricThreesMade": "Üçlük",
+
+  "settingsNotificationsToggle": "Sistem bildirim ayarlarını aç",
+  "settingsNotificationsSubtitle": "Maç hatırlatmalarını yönet",
+  "settingsShowOnboarding": "Karşılama turunu tekrar oynat",
+  "settingsShowOnboardingSubtitle": "3 ekranlık tanıtımı yeniden gör"
 }

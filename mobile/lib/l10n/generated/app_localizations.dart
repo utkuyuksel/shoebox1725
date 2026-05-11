@@ -665,6 +665,138 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Skip'**
   String get onboardingSkip;
+
+  /// No description provided for @matchSectionSeasonAverages.
+  ///
+  /// In en, this message translates to:
+  /// **'Season averages'**
+  String get matchSectionSeasonAverages;
+
+  /// No description provided for @matchSectionHitRate.
+  ///
+  /// In en, this message translates to:
+  /// **'Hit rate · season'**
+  String get matchSectionHitRate;
+
+  /// No description provided for @matchSectionRadar.
+  ///
+  /// In en, this message translates to:
+  /// **'Form fingerprint'**
+  String get matchSectionRadar;
+
+  /// No description provided for @matchSectionReferee.
+  ///
+  /// In en, this message translates to:
+  /// **'Referee · history'**
+  String get matchSectionReferee;
+
+  /// No description provided for @matchRefereeNoHistory.
+  ///
+  /// In en, this message translates to:
+  /// **'No history'**
+  String get matchRefereeNoHistory;
+
+  /// No description provided for @matchTrendCardTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'{teamLabel} · last {n} matches'**
+  String matchTrendCardTitle(String teamLabel, int n);
+
+  /// No description provided for @matchTrendSeasonAvg.
+  ///
+  /// In en, this message translates to:
+  /// **'Season avg: {avg} per game'**
+  String matchTrendSeasonAvg(String avg);
+
+  /// No description provided for @matchTrendNoData.
+  ///
+  /// In en, this message translates to:
+  /// **'No data for this metric.'**
+  String get matchTrendNoData;
+
+  /// No description provided for @metricGoalsFor.
+  ///
+  /// In en, this message translates to:
+  /// **'Goals for'**
+  String get metricGoalsFor;
+
+  /// No description provided for @metricGoalsAgainst.
+  ///
+  /// In en, this message translates to:
+  /// **'Goals against'**
+  String get metricGoalsAgainst;
+
+  /// No description provided for @metricCorners.
+  ///
+  /// In en, this message translates to:
+  /// **'Corners'**
+  String get metricCorners;
+
+  /// No description provided for @metricYellowCards.
+  ///
+  /// In en, this message translates to:
+  /// **'Yellow cards'**
+  String get metricYellowCards;
+
+  /// No description provided for @metricShots.
+  ///
+  /// In en, this message translates to:
+  /// **'Shots'**
+  String get metricShots;
+
+  /// No description provided for @metricPoints.
+  ///
+  /// In en, this message translates to:
+  /// **'Points'**
+  String get metricPoints;
+
+  /// No description provided for @metricPointsAllowed.
+  ///
+  /// In en, this message translates to:
+  /// **'Points allowed'**
+  String get metricPointsAllowed;
+
+  /// No description provided for @metricRebounds.
+  ///
+  /// In en, this message translates to:
+  /// **'Rebounds'**
+  String get metricRebounds;
+
+  /// No description provided for @metricAssists.
+  ///
+  /// In en, this message translates to:
+  /// **'Assists'**
+  String get metricAssists;
+
+  /// No description provided for @metricThreesMade.
+  ///
+  /// In en, this message translates to:
+  /// **'3-pointers made'**
+  String get metricThreesMade;
+
+  /// No description provided for @settingsNotificationsToggle.
+  ///
+  /// In en, this message translates to:
+  /// **'Open system Notification settings'**
+  String get settingsNotificationsToggle;
+
+  /// No description provided for @settingsNotificationsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Manage kickoff reminders'**
+  String get settingsNotificationsSubtitle;
+
+  /// No description provided for @settingsShowOnboarding.
+  ///
+  /// In en, this message translates to:
+  /// **'Replay the welcome tour'**
+  String get settingsShowOnboarding;
+
+  /// No description provided for @settingsShowOnboardingSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'See the 3-screen intro again'**
+  String get settingsShowOnboardingSubtitle;
 }
 
 class _AppLocalizationsDelegate

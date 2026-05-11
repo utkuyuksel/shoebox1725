@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../app/theme.dart';
 import '../../../../core/widgets/section_card.dart';
+import '../../../../l10n/generated/app_localizations.dart';
 import '../../data/match_preview_dto.dart';
 
 class RadarCard extends StatelessWidget {
@@ -44,7 +45,7 @@ class RadarCard extends StatelessWidget {
     if (radar.axes.isEmpty) return const SizedBox.shrink();
 
     return SectionCard(
-      title: 'Form fingerprint',
+      title: AppLocalizations.of(context).matchSectionRadar,
       trailing: Text(
         '× league avg',
         style: Theme.of(context).textTheme.labelSmall?.copyWith(color: ShoeboxColors.textMid),
