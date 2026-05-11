@@ -37,11 +37,15 @@ class Settings(BaseSettings):
     PUBLIC_BASE_URL: Optional[str] = None            # used to register webhook URLs
 
     # --- Supabase Auth ---
+    # Verification is done via the project's public JWKS endpoint
+    # ({SUPABASE_URL}/auth/v1/.well-known/jwks.json), so no shared secret is
+    # stored server-side. Only the project URL is needed.
     SUPABASE_URL: Optional[str] = None
-    SUPABASE_JWT_SECRET: Optional[str] = None        # HS256 secret OR JWKS endpoint base
 
     # --- RevenueCat ---
-    REVENUECAT_WEBHOOK_SECRET: Optional[str] = None
+    # Project-level secret API key. Used for webhook signature verification
+    # and any server-side calls to RevenueCat REST endpoints.
+    REVENUECAT_SECRET_API_KEY: Optional[str] = None
 
     # --- Observability ---
     SENTRY_DSN: Optional[str] = None
