@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 
 import '../../../app/theme.dart';
+import '../../../l10n/generated/app_localizations.dart';
 import '../../auth/state/auth_provider.dart';
 import '../data/billing_repository.dart';
 import '../state/premium_provider.dart';
@@ -61,7 +62,7 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
       ref.invalidate(customerInfoProvider);
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Premium unlocked.')),
+        SnackBar(content: Text(AppLocalizations.of(context).paywallUnlocked)),
       );
       if (context.canPop()) context.pop();
     } on PlatformException catch (e) {
@@ -85,15 +86,17 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
     if (!mounted) return;
     setState(() => _purchasing = false);
     final isPremium = ref.read(isPremiumProvider);
+    final l = AppLocalizations.of(context);
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: Text(isPremium ? 'Purchases restored.' : 'Nothing to restore.'),
+      content: Text(isPremium ? l.paywallRestored : l.paywallNothingToRestore),
     ));
   }
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
     return Scaffold(
-      appBar: AppBar(title: const Text('Premium')),
+      appBar: AppBar(title: Text(l.paywallTitle)),
       body: SafeArea(
         child: _loading
             ? const Center(child: CircularProgressIndicator())
@@ -116,7 +119,7 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
                     Center(
                       child: TextButton(
                         onPressed: _purchasing ? null : _restore,
-                        child: const Text('Restore purchases'),
+                        child: Text(l.paywallRestore),
                       ),
                     ),
                     const SizedBox(height: 8),
@@ -129,6 +132,7 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
   }
 
   List<Widget> _buildPackages() {
+    final l = AppLocalizations.of(context);
     final packages = _offerings?.current?.availablePackages ?? const [];
     if (packages.isEmpty) {
       return [
@@ -138,9 +142,9 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
             color: ShoeboxColors.surface,
             borderRadius: BorderRadius.circular(12),
           ),
-          child: const Text(
-            'No subscription plans are configured yet. Add an offering in the RevenueCat dashboard to enable purchases.',
-            style: TextStyle(color: ShoeboxColors.textMid),
+          child: Text(
+            l.paywallNoPlans,
+            style: const TextStyle(color: ShoeboxColors.textMid),
           ),
         ),
       ];
@@ -180,8 +184,8 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
                   valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                 ),
               )
-            : const Text('Continue',
-                style: TextStyle(fontWeight: FontWeight.w700, fontSize: 15)),
+            : Text(l.paywallContinue,
+                style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 15)),
       ),
     ];
   }
@@ -192,6 +196,7 @@ class _Hero extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
     return Column(
       children: [
         Container(
@@ -205,17 +210,17 @@ class _Hero extends StatelessWidget {
         ),
         const SizedBox(height: 12),
         Text(
-          'Unlock the full edge',
+          l.paywallHeroTitle,
           textAlign: TextAlign.center,
           style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                 fontWeight: FontWeight.w800,
               ),
         ),
         const SizedBox(height: 4),
-        const Text(
-          'Hit rates, splits, and full season averages.',
+        Text(
+          l.paywallHeroSubtitle,
           textAlign: TextAlign.center,
-          style: TextStyle(color: ShoeboxColors.textMid),
+          style: const TextStyle(color: ShoeboxColors.textMid),
         ),
       ],
     );
@@ -227,13 +232,14 @@ class _BenefitList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const items = <(IconData, String, String)>[
-      (Icons.percent_rounded, 'Hit-rate breakdowns',
-          'Over/under 2.5, BTTS, AH lines — per team and per league.'),
-      (Icons.show_chart_rounded, 'Home / away splits',
-          'See where teams over- and under-perform vs the market.'),
-      (Icons.bolt_rounded, 'Referee deep-dive',
-          'Cards, penalties, and historical patterns by official.'),
+    final l = AppLocalizations.of(context);
+    final items = <(IconData, String, String)>[
+      (Icons.percent_rounded, l.paywallBenefitHitRatesTitle,
+          l.paywallBenefitHitRatesBody),
+      (Icons.show_chart_rounded, l.paywallBenefitSplitsTitle,
+          l.paywallBenefitSplitsBody),
+      (Icons.bolt_rounded, l.paywallBenefitRefereeTitle,
+          l.paywallBenefitRefereeBody),
     ];
     return Column(
       children: [
@@ -347,10 +353,10 @@ class _LegalFooter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Text(
-      'Subscriptions renew automatically until cancelled. Manage in the App Store or Play Store.',
+    return Text(
+      AppLocalizations.of(context).paywallLegal,
       textAlign: TextAlign.center,
-      style: TextStyle(color: ShoeboxColors.textLow, fontSize: 11),
+      style: const TextStyle(color: ShoeboxColors.textLow, fontSize: 11),
     );
   }
 }

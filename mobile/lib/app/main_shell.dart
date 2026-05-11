@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 
 import '../features/paywall/state/premium_provider.dart';
 import '../features/watchlist/data/watchlist_repository.dart';
+import '../l10n/generated/app_localizations.dart';
 import 'theme.dart';
 
 /// Three-tab bottom navigation hosted on the root route. Each tab is its own
@@ -26,6 +27,7 @@ class MainShell extends ConsumerWidget {
     final watchlistCount =
         ref.watch(watchlistFixturesProvider).valueOrNull?.length ?? 0;
     final isPremium = ref.watch(isPremiumProvider);
+    final l = AppLocalizations.of(context);
 
     return Scaffold(
       body: shell,
@@ -37,10 +39,10 @@ class MainShell extends ConsumerWidget {
         surfaceTintColor: Colors.transparent,
         labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
         destinations: [
-          const NavigationDestination(
-            icon: Icon(Icons.shield_outlined),
-            selectedIcon: Icon(Icons.shield_rounded, color: ShoeboxColors.accent),
-            label: 'Leagues',
+          NavigationDestination(
+            icon: const Icon(Icons.shield_outlined),
+            selectedIcon: const Icon(Icons.shield_rounded, color: ShoeboxColors.accent),
+            label: l.navLeagues,
           ),
           NavigationDestination(
             icon: _BadgedIcon(
@@ -52,7 +54,7 @@ class MainShell extends ConsumerWidget {
               color: ShoeboxColors.accent,
               count: watchlistCount,
             ),
-            label: 'Watchlist',
+            label: l.navWatchlist,
           ),
           NavigationDestination(
             icon: _DotIcon(
@@ -64,7 +66,7 @@ class MainShell extends ConsumerWidget {
               color: ShoeboxColors.accent,
               showDot: isPremium,
             ),
-            label: 'Account',
+            label: l.navAccount,
           ),
         ],
       ),

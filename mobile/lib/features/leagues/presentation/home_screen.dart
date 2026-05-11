@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import '../../../app/theme.dart';
 import '../../../core/widgets/async_view.dart';
 import '../../../core/widgets/skeleton.dart';
+import '../../../l10n/generated/app_localizations.dart';
 import '../data/league_dto.dart';
 import '../data/leagues_repository.dart';
 import 'widgets/country_tile.dart';
@@ -24,6 +25,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final leagues = ref.watch(leaguesProvider(_sport));
+    final l = AppLocalizations.of(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -43,7 +45,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         actions: [
           IconButton(
             icon: const Icon(Icons.sports_outlined),
-            tooltip: 'Referees',
+            tooltip: l.homeRefereesTooltip,
             onPressed: () => context.push('/referees'),
           ),
         ],
@@ -57,13 +59,15 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             _SportSegment(
               value: _sport,
               onChanged: (s) => setState(() => _sport = s),
+              footballLabel: l.sportFootball,
+              basketballLabel: l.sportBasketball,
             ),
             Expanded(
               child: AsyncView<LeaguesPayload>(
                 value: leagues,
                 onRetry: () => ref.invalidate(leaguesProvider(_sport)),
                 isEmpty: (p) => p.count == 0,
-                emptyMessage: 'No leagues available for this sport yet.',
+                emptyMessage: l.homeEmpty,
                 emptyIcon: Icons.shield_outlined,
                 loadingBuilder: (_) => SkeletonList(
                   itemCount: 6,
@@ -82,7 +86,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 class _SportSegment extends StatelessWidget {
   final String value;
   final ValueChanged<String> onChanged;
-  const _SportSegment({required this.value, required this.onChanged});
+  final String footballLabel;
+  final String basketballLabel;
+  const _SportSegment({
+    required this.value,
+    required this.onChanged,
+    required this.footballLabel,
+    required this.basketballLabel,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -96,8 +107,8 @@ class _SportSegment extends StatelessWidget {
         ),
         child: Row(
           children: [
-            _Pill(label: 'Football', selected: value == 'football', onTap: () => onChanged('football')),
-            _Pill(label: 'Basketball', selected: value == 'basketball', onTap: () => onChanged('basketball')),
+            _Pill(label: footballLabel, selected: value == 'football', onTap: () => onChanged('football')),
+            _Pill(label: basketballLabel, selected: value == 'basketball', onTap: () => onChanged('basketball')),
           ],
         ),
       ),
@@ -146,12 +157,13 @@ class _LeaguesList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context);
     final countries = payload.grouped.keys.toList()..sort();
     return ListView(
       padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
       children: [
         if (payload.popular.isNotEmpty) ...[
-          _SectionLabel('Popular'),
+          _SectionLabel(loc.homePopular),
           const SizedBox(height: 8),
           SizedBox(
             height: 156,
@@ -169,7 +181,7 @@ class _LeaguesList extends StatelessWidget {
           ),
           const SizedBox(height: 24),
         ],
-        _SectionLabel('All competitions'),
+        _SectionLabel(loc.homeAllCompetitions),
         const SizedBox(height: 8),
         ...countries.map((country) {
           final list = payload.grouped[country] ?? [];

@@ -1,0 +1,279 @@
+// ignore: unused_import
+import 'package:intl/intl.dart' as intl;
+import 'app_localizations.dart';
+
+// ignore_for_file: type=lint
+
+/// The translations for Spanish Castilian (`es`).
+class AppLocalizationsEs extends AppLocalizations {
+  AppLocalizationsEs([String locale = 'es']) : super(locale);
+
+  @override
+  String get appTitle => 'Shoebox';
+
+  @override
+  String get navLeagues => 'Ligas';
+
+  @override
+  String get navWatchlist => 'Mi lista';
+
+  @override
+  String get navAccount => 'Cuenta';
+
+  @override
+  String get sportFootball => 'Fútbol';
+
+  @override
+  String get sportBasketball => 'Baloncesto';
+
+  @override
+  String get homePopular => 'Populares';
+
+  @override
+  String get homeAllCompetitions => 'Todas las competiciones';
+
+  @override
+  String get homeRefereesTooltip => 'Árbitros';
+
+  @override
+  String get homeEmpty => 'Aún no hay ligas disponibles para este deporte.';
+
+  @override
+  String get homeOneCompetition => '1 competición';
+
+  @override
+  String homeCompetitionsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count competiciones',
+      one: '1 competición',
+      zero: 'Sin competiciones',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get watchlistTitle => 'Mi lista';
+
+  @override
+  String get watchlistSignedOutTitle => 'Inicia sesión para usar tu lista';
+
+  @override
+  String get watchlistSignedOutBody =>
+      'Guarda partidos y sincronízalos entre dispositivos.';
+
+  @override
+  String get watchlistEmpty =>
+      'Toca el marcador en cualquier partido para añadirlo aquí.';
+
+  @override
+  String get watchlistSheetTitle => 'Inicia sesión para guardar partidos';
+
+  @override
+  String get watchlistSheetBody =>
+      'Tu lista se sincroniza entre dispositivos al iniciar sesión.';
+
+  @override
+  String watchlistFailed(String detail) {
+    return 'Error: $detail';
+  }
+
+  @override
+  String get loginWelcomeBack => 'Bienvenido de nuevo';
+
+  @override
+  String get loginCreateAccount => 'Crea tu cuenta';
+
+  @override
+  String get loginSubtitleSignUp =>
+      'Regístrate para guardar tu lista y desbloquear las picks premium.';
+
+  @override
+  String get loginSubtitleSignIn =>
+      'Inicia sesión para seguir con tu análisis.';
+
+  @override
+  String get loginEmail => 'Email';
+
+  @override
+  String get loginPassword => 'Contraseña';
+
+  @override
+  String get loginErrorRequired => 'Obligatorio';
+
+  @override
+  String get loginErrorEmail => 'Introduce un email válido';
+
+  @override
+  String get loginErrorPasswordShort => 'Mínimo 6 caracteres';
+
+  @override
+  String get loginConfirmInbox =>
+      'Revisa tu bandeja para confirmar tu email y luego inicia sesión.';
+
+  @override
+  String get loginSignIn => 'Iniciar sesión';
+
+  @override
+  String get loginSignUp => 'Registrarse';
+
+  @override
+  String get loginPromptToSignUp => '¿No tienes cuenta? ';
+
+  @override
+  String get loginPromptToSignIn => '¿Ya tienes cuenta? ';
+
+  @override
+  String get settingsTitle => 'Ajustes';
+
+  @override
+  String get settingsSectionAccount => 'Cuenta';
+
+  @override
+  String get settingsSectionSubscription => 'Suscripción';
+
+  @override
+  String get settingsSectionAbout => 'Acerca de';
+
+  @override
+  String get settingsSectionLanguage => 'Idioma';
+
+  @override
+  String get settingsSignInCta => 'Inicia sesión o regístrate';
+
+  @override
+  String get settingsSignInSubtitle => 'Guarda tu lista y desbloquea premium';
+
+  @override
+  String settingsSignedInSubtitle(String idShort) {
+    return 'ID de usuario: $idShort…';
+  }
+
+  @override
+  String get settingsSignOut => 'Cerrar sesión';
+
+  @override
+  String get settingsPremiumActive => 'Premium activo';
+
+  @override
+  String get settingsPremiumActiveSubtitle =>
+      'Tienes acceso a todas las funciones';
+
+  @override
+  String get settingsPremiumUpgrade => 'Mejora a Premium';
+
+  @override
+  String get settingsPremiumUpgradeSubtitle =>
+      'Hit rates, splits, promedios completos';
+
+  @override
+  String settingsAboutVersion(String version) {
+    return 'Versión $version';
+  }
+
+  @override
+  String get settingsSignOutDialogTitle => '¿Cerrar sesión?';
+
+  @override
+  String get settingsSignOutDialogBody =>
+      'Tendrás que iniciar sesión otra vez para acceder a premium.';
+
+  @override
+  String get settingsLanguageSystem => 'Predeterminado del sistema';
+
+  @override
+  String get settingsLanguageEnglish => 'English';
+
+  @override
+  String get settingsLanguageTurkish => 'Türkçe';
+
+  @override
+  String get settingsLanguageSpanish => 'Español';
+
+  @override
+  String get settingsLanguagePortuguese => 'Português';
+
+  @override
+  String get paywallTitle => 'Premium';
+
+  @override
+  String get paywallHeroTitle => 'Desbloquea toda la ventaja';
+
+  @override
+  String get paywallHeroSubtitle =>
+      'Hit rates, splits y promedios de temporada completos.';
+
+  @override
+  String get paywallBenefitHitRatesTitle => 'Desglose de hit rates';
+
+  @override
+  String get paywallBenefitHitRatesBody =>
+      'Más/menos 2.5, ambos marcan, líneas AH — por equipo y por liga.';
+
+  @override
+  String get paywallBenefitSplitsTitle => 'Casa / visitante';
+
+  @override
+  String get paywallBenefitSplitsBody =>
+      'Ve dónde los equipos rinden por encima o por debajo del mercado.';
+
+  @override
+  String get paywallBenefitRefereeTitle => 'Análisis de árbitro';
+
+  @override
+  String get paywallBenefitRefereeBody =>
+      'Tarjetas, penaltis y patrones históricos por colegiado.';
+
+  @override
+  String get paywallNoPlans =>
+      'Todavía no hay planes de suscripción configurados. Añade una oferta en el panel de RevenueCat para activar las compras.';
+
+  @override
+  String get paywallContinue => 'Continuar';
+
+  @override
+  String get paywallRestore => 'Restaurar compras';
+
+  @override
+  String get paywallUnlocked => 'Premium desbloqueado.';
+
+  @override
+  String get paywallRestored => 'Compras restauradas.';
+
+  @override
+  String get paywallNothingToRestore => 'Nada que restaurar.';
+
+  @override
+  String get paywallLegal =>
+      'Las suscripciones se renuevan automáticamente hasta su cancelación. Gestiona desde App Store o Play Store.';
+
+  @override
+  String paywallGateLabel(String tier) {
+    return 'Desbloquear con $tier';
+  }
+
+  @override
+  String get commonCancel => 'Cancelar';
+
+  @override
+  String get commonClose => 'Cerrar';
+
+  @override
+  String get commonTryAgain => 'Reintentar';
+
+  @override
+  String get commonRetry => 'Reintentar';
+
+  @override
+  String get commonGenericError => 'No se ha podido cargar';
+
+  @override
+  String get commonNothingHere => 'Aún no hay nada que mostrar.';
+
+  @override
+  String get commonLive => 'EN VIVO';
+
+  @override
+  String get commonFinalShort => 'FT';
+}

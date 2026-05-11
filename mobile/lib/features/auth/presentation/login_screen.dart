@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../app/theme.dart';
+import '../../../l10n/generated/app_localizations.dart';
 import '../data/auth_repository.dart';
 
 enum _Mode { signIn, signUp }
@@ -54,7 +55,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         if (res.session == null) {
           // Email confirmation required → show info, don't navigate.
           setState(() {
-            _info = 'Check your inbox to confirm your email, then sign in.';
+            _info = AppLocalizations.of(context).loginConfirmInbox;
             _mode = _Mode.signIn;
           });
           return;
@@ -79,6 +80,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     final isSignUp = _mode == _Mode.signUp;
+    final l = AppLocalizations.of(context);
     return Scaffold(
       appBar: AppBar(
         leading: context.canPop()
@@ -103,7 +105,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         size: 48, color: ShoeboxColors.accent),
                     const SizedBox(height: 12),
                     Text(
-                      isSignUp ? 'Create your account' : 'Welcome back',
+                      isSignUp ? l.loginCreateAccount : l.loginWelcomeBack,
                       textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                             fontWeight: FontWeight.w800,
@@ -111,9 +113,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     ),
                     const SizedBox(height: 6),
                     Text(
-                      isSignUp
-                          ? 'Sign up to save watchlists and unlock premium picks.'
-                          : 'Sign in to continue your research.',
+                      isSignUp ? l.loginSubtitleSignUp : l.loginSubtitleSignIn,
                       textAlign: TextAlign.center,
                       style: const TextStyle(color: ShoeboxColors.textMid),
                     ),
@@ -124,12 +124,12 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       autocorrect: false,
                       enableSuggestions: false,
                       textInputAction: TextInputAction.next,
-                      decoration: _decoration('Email', Icons.alternate_email),
+                      decoration: _decoration(l.loginEmail, Icons.alternate_email),
                       validator: (v) {
                         final s = v?.trim() ?? '';
-                        if (s.isEmpty) return 'Required';
+                        if (s.isEmpty) return l.loginErrorRequired;
                         if (!s.contains('@') || !s.contains('.')) {
-                          return 'Enter a valid email';
+                          return l.loginErrorEmail;
                         }
                         return null;
                       },
@@ -142,7 +142,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       enableSuggestions: false,
                       textInputAction: TextInputAction.done,
                       onFieldSubmitted: (_) => _submit(),
-                      decoration: _decoration('Password', Icons.lock_outline).copyWith(
+                      decoration: _decoration(l.loginPassword, Icons.lock_outline).copyWith(
                         suffixIcon: IconButton(
                           icon: Icon(_obscure
                               ? Icons.visibility_outlined
@@ -152,9 +152,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         ),
                       ),
                       validator: (v) {
-                        if (v == null || v.isEmpty) return 'Required';
+                        if (v == null || v.isEmpty) return l.loginErrorRequired;
                         if (isSignUp && v.length < 6) {
-                          return 'At least 6 characters';
+                          return l.loginErrorPasswordShort;
                         }
                         return null;
                       },
@@ -187,7 +187,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                     AlwaysStoppedAnimation<Color>(Colors.white),
                               ),
                             )
-                          : Text(isSignUp ? 'Sign up' : 'Sign in',
+                          : Text(isSignUp ? l.loginSignUp : l.loginSignIn,
                               style: const TextStyle(
                                   fontWeight: FontWeight.w700, fontSize: 15)),
                     ),
@@ -204,11 +204,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         TextSpan(children: [
                           TextSpan(
                               text: isSignUp
-                                  ? 'Already have an account? '
-                                  : "Don't have an account? ",
+                                  ? l.loginPromptToSignIn
+                                  : l.loginPromptToSignUp,
                               style: const TextStyle(color: ShoeboxColors.textMid)),
                           TextSpan(
-                              text: isSignUp ? 'Sign in' : 'Sign up',
+                              text: isSignUp ? l.loginSignIn : l.loginSignUp,
                               style: const TextStyle(
                                   color: ShoeboxColors.accent,
                                   fontWeight: FontWeight.w700)),

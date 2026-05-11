@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../app/theme.dart';
+import '../../../l10n/generated/app_localizations.dart';
 import '../../auth/state/auth_provider.dart';
 import '../data/watchlist_repository.dart';
 
@@ -56,8 +57,9 @@ class _WatchlistStarButtonState extends ConsumerState<WatchlistStarButton> {
       // Roll back optimistic flip.
       if (mounted) setState(() => _localOverride = currentlyOn);
       if (mounted) {
+        final detail = '${e.response?.statusCode ?? e.message ?? "?"}';
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text('Failed: ${e.response?.statusCode ?? e.message}'),
+          content: Text(AppLocalizations.of(context).watchlistFailed(detail)),
         ));
       }
     } finally {
@@ -66,6 +68,7 @@ class _WatchlistStarButtonState extends ConsumerState<WatchlistStarButton> {
   }
 
   void _showSignInPrompt() {
+    final l = AppLocalizations.of(context);
     showModalBottomSheet(
       context: context,
       backgroundColor: ShoeboxColors.surface,
@@ -89,15 +92,15 @@ class _WatchlistStarButtonState extends ConsumerState<WatchlistStarButton> {
             const Icon(Icons.bookmark_added_outlined,
                 size: 36, color: ShoeboxColors.accent),
             const SizedBox(height: 12),
-            const Text(
-              'Sign in to save fixtures',
-              style: TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
+            Text(
+              l.watchlistSheetTitle,
+              style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
             ),
             const SizedBox(height: 6),
-            const Text(
-              'Your watchlist syncs across devices once you sign in.',
+            Text(
+              l.watchlistSheetBody,
               textAlign: TextAlign.center,
-              style: TextStyle(color: ShoeboxColors.textMid),
+              style: const TextStyle(color: ShoeboxColors.textMid),
             ),
             const SizedBox(height: 20),
             SizedBox(
@@ -111,7 +114,7 @@ class _WatchlistStarButtonState extends ConsumerState<WatchlistStarButton> {
                   Navigator.pop(ctx);
                   context.push('/login');
                 },
-                child: const Text('Sign in'),
+                child: Text(l.loginSignIn),
               ),
             ),
           ],

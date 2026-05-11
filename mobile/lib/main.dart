@@ -5,13 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'app/env.dart';
+import 'app/locale_provider.dart';
 import 'app/router.dart';
 import 'app/theme.dart';
 import 'features/paywall/data/billing_repository.dart';
 import 'features/paywall/state/premium_provider.dart';
+import 'l10n/generated/app_localizations.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,6 +27,9 @@ Future<void> main() async {
     systemNavigationBarColor: ShoeboxColors.navy,
     systemNavigationBarIconBrightness: Brightness.light,
   ));
+
+  // SharedPreferences for the locale override (and future tiny settings).
+  final prefs = await SharedPreferences.getInstance();
 
   // Supabase Auth — persists session to flutter_secure_storage and exposes
   // the singleton via Supabase.instance.client.
@@ -40,7 +46,12 @@ Future<void> main() async {
   // try/catch so a transient configure failure doesn't block app boot.
   await _configureRevenueCat();
 
-  runApp(const ProviderScope(child: ShoeboxApp()));
+  runApp(ProviderScope(
+    overrides: [
+      sharedPreferencesProvider.overrideWithValue(prefs),
+    ],
+    child: const ShoeboxApp(),
+  ));
 }
 
 Future<void> _configureRevenueCat() async {
@@ -65,11 +76,16 @@ class ShoeboxApp extends ConsumerWidget {
     // Keep premium status fresh — the provider eagerly listens to auth
     // changes and refreshes RC customer info.
     ref.watch(premiumStatusSyncProvider);
+    final localeOverride = ref.watch(localeControllerProvider);
+
     return MaterialApp.router(
       title: 'Shoebox',
       debugShowCheckedModeBanner: false,
       theme: buildShoeboxTheme(),
       themeMode: ThemeMode.dark,
+      locale: localeOverride,
+      supportedLocales: AppLocalizations.supportedLocales,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
       routerConfig: appRouter,
     );
   }

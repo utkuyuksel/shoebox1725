@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../app/theme.dart';
 import '../../../../core/widgets/team_logo.dart';
+import '../../../../l10n/generated/app_localizations.dart';
 import '../../data/league_dto.dart';
 
 class CountryTile extends StatelessWidget {
@@ -52,7 +53,7 @@ class CountryTile extends StatelessWidget {
           fontWeight: FontWeight.w600,
         )),
         subtitle: Text(
-          '${leagues.length} competition${leagues.length == 1 ? '' : 's'}',
+          AppLocalizations.of(context).homeCompetitionsCount(leagues.length),
           style: Theme.of(context).textTheme.bodySmall?.copyWith(color: ShoeboxColors.textMid),
         ),
         children: leagues

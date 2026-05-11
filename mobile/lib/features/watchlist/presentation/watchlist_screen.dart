@@ -8,6 +8,7 @@ import '../../../app/theme.dart';
 import '../../../core/widgets/async_view.dart';
 import '../../../core/widgets/skeleton.dart';
 import '../../../core/widgets/team_logo.dart';
+import '../../../l10n/generated/app_localizations.dart';
 import '../../auth/state/auth_provider.dart';
 import '../data/watchlist_dto.dart';
 import '../data/watchlist_repository.dart';
@@ -19,9 +20,10 @@ class WatchlistScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final signedIn = ref.watch(isSignedInProvider);
+    final l = AppLocalizations.of(context);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Watchlist')),
+      appBar: AppBar(title: Text(l.watchlistTitle)),
       body: signedIn
           ? _SignedInBody(ref: ref)
           : const _SignedOutBody(),
@@ -34,6 +36,7 @@ class _SignedOutBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(32),
@@ -50,13 +53,13 @@ class _SignedOutBody extends StatelessWidget {
                   size: 32, color: ShoeboxColors.accent),
             ),
             const SizedBox(height: 16),
-            const Text('Sign in to use the watchlist',
-                style: TextStyle(fontWeight: FontWeight.w700, fontSize: 16)),
+            Text(l.watchlistSignedOutTitle,
+                style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 16)),
             const SizedBox(height: 4),
-            const Text(
-              'Bookmark fixtures and keep them synced across devices.',
+            Text(
+              l.watchlistSignedOutBody,
               textAlign: TextAlign.center,
-              style: TextStyle(color: ShoeboxColors.textMid),
+              style: const TextStyle(color: ShoeboxColors.textMid),
             ),
             const SizedBox(height: 20),
             FilledButton(
@@ -65,7 +68,7 @@ class _SignedOutBody extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
               ),
               onPressed: () => context.push('/login'),
-              child: const Text('Sign in'),
+              child: Text(l.loginSignIn),
             ),
           ],
         ),
@@ -81,6 +84,7 @@ class _SignedInBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final value = ref.watch(watchlistFixturesProvider);
+    final loc = AppLocalizations.of(context);
     return RefreshIndicator(
       color: ShoeboxColors.accent,
       backgroundColor: ShoeboxColors.surface,
@@ -89,7 +93,7 @@ class _SignedInBody extends StatelessWidget {
         value: value,
         onRetry: () => ref.invalidate(watchlistFixturesProvider),
         isEmpty: (l) => l.isEmpty,
-        emptyMessage: 'Tap the bookmark on any fixture to add it here.',
+        emptyMessage: loc.watchlistEmpty,
         emptyIcon: Icons.bookmark_outline_rounded,
         loadingBuilder: (_) => SkeletonList(
           itemCount: 6,
@@ -256,17 +260,18 @@ class _StatusChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
     final Color bg;
     final Color fg;
     final String text;
     if (fixture.isLive) {
       bg = ShoeboxColors.danger.withValues(alpha: 0.15);
       fg = ShoeboxColors.danger;
-      text = 'LIVE';
+      text = l.commonLive;
     } else if (fixture.isFinished) {
       bg = ShoeboxColors.surfaceAlt;
       fg = ShoeboxColors.textMid;
-      text = 'FT';
+      text = l.commonFinalShort;
     } else {
       bg = ShoeboxColors.accentSoft;
       fg = ShoeboxColors.accent;

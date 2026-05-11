@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../app/theme.dart';
+import '../../../../l10n/generated/app_localizations.dart';
 import '../../state/premium_provider.dart';
 
 /// Wraps a premium-only widget. When the user has the entitlement we render
@@ -14,7 +15,8 @@ import '../../state/premium_provider.dart';
 class PremiumGate extends ConsumerWidget {
   final Widget child;
 
-  /// Optional label shown inside the lock pill.
+  /// Tier label shown inside the lock pill. Defaults to "Premium" so the
+  /// English/Turkish/etc. paywallGateLabel ARB picks up "Unlock with Premium".
   final String label;
 
   const PremiumGate({
@@ -89,7 +91,7 @@ class _LockPill extends StatelessWidget {
           const Icon(Icons.lock_rounded, size: 16, color: ShoeboxColors.accent),
           const SizedBox(width: 6),
           Text(
-            'Unlock with $label',
+            AppLocalizations.of(context).paywallGateLabel(label),
             style: const TextStyle(
                 color: ShoeboxColors.accent,
                 fontWeight: FontWeight.w700,

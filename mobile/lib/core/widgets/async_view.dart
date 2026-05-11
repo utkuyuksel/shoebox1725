@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../app/theme.dart';
+import '../../l10n/generated/app_localizations.dart';
 
 /// Single source of truth for the loading / error / empty / data cycle.
 /// Each variant is intentionally tasteful — a sports stats app spends a lot
@@ -47,7 +48,8 @@ class AsyncView<T> extends StatelessWidget {
       data: (d) {
         if (isEmpty != null && isEmpty!(d)) {
           return _EmptyView(
-            message: emptyMessage ?? 'Nothing to show yet.',
+            message: emptyMessage ??
+                AppLocalizations.of(context).commonNothingHere,
             icon: emptyIcon ?? Icons.inbox_outlined,
           );
         }
@@ -64,6 +66,7 @@ class _ErrorView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(32),
@@ -81,7 +84,7 @@ class _ErrorView extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             Text(
-              'Couldn’t load this',
+              l.commonGenericError,
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
                 fontWeight: FontWeight.w700,
               ),
@@ -99,7 +102,7 @@ class _ErrorView extends StatelessWidget {
               FilledButton.tonalIcon(
                 onPressed: onRetry,
                 icon: const Icon(Icons.refresh_rounded, size: 18),
-                label: const Text('Try again'),
+                label: Text(l.commonRetry),
               ),
             ],
           ],
