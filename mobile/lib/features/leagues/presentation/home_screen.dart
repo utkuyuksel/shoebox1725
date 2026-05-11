@@ -192,7 +192,7 @@ class _LeaguesList extends StatelessWidget {
           _SectionLabel('Popular'),
           const SizedBox(height: 8),
           SizedBox(
-            height: 140,
+            height: 156,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: payload.popular.length,

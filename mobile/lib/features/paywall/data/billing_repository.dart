@@ -8,8 +8,21 @@ import '../../../app/env.dart';
 
 /// Thin wrapper around the RevenueCat SDK. Returns `null`s when called from
 /// platforms RC doesn't support (web, desktop) so callers don't need to guard.
+///
+/// All methods also short-circuit if RevenueCat hasn't been configured yet —
+/// the SDK turns pre-configure calls into hard `fatalError`s (not exceptions
+/// we can catch), so guarding here is the only safe move. The `_ready` flag
+/// is flipped by [markReady] from `main.dart` once `Purchases.configure`
+/// returns.
 class BillingRepository {
+  static bool _ready = false;
+
+  static void markReady() {
+    _ready = true;
+  }
+
   bool get _supported {
+    if (!_ready) return false;
     if (kIsWeb) return false;
     try {
       return Platform.isIOS || Platform.isAndroid;

@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:io' show Platform;
 
 import 'package:flutter/foundation.dart';
@@ -11,6 +10,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'app/env.dart';
 import 'app/router.dart';
 import 'app/theme.dart';
+import 'features/paywall/data/billing_repository.dart';
 import 'features/paywall/state/premium_provider.dart';
 
 Future<void> main() async {
@@ -33,9 +33,12 @@ Future<void> main() async {
     debug: kDebugMode,
   );
 
-  // RevenueCat — best-effort. Failures here must not block app boot (e.g. no
-  // network on cold start, or running on a platform RC doesn't support).
-  unawaited(_configureRevenueCat());
+  // RevenueCat must be configured *before* the first `Purchases.logIn` call
+  // (which the premium provider fires immediately on app start when a user
+  // is already signed in). Calling logIn pre-configure is a hard fatalError
+  // in the SDK, not a recoverable exception — so we await here. Wrapped in
+  // try/catch so a transient configure failure doesn't block app boot.
+  await _configureRevenueCat();
 
   runApp(const ProviderScope(child: ShoeboxApp()));
 }
@@ -48,6 +51,7 @@ Future<void> _configureRevenueCat() async {
     if (!isMobile) return;
     await Purchases.setLogLevel(kDebugMode ? LogLevel.warn : LogLevel.error);
     await Purchases.configure(PurchasesConfiguration(AppEnv.revenueCatSdkKey));
+    BillingRepository.markReady();
   } catch (e) {
     debugPrint('RevenueCat configure failed: $e');
   }
