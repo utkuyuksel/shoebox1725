@@ -14,6 +14,7 @@ import '../features/referee/presentation/referee_search_screen.dart';
 import '../features/settings/presentation/settings_screen.dart';
 import '../features/squad/presentation/squad_screen.dart';
 import '../features/watchlist/presentation/watchlist_screen.dart';
+import 'main_shell.dart';
 
 /// Smooth slide-from-right + fade for every pushed route. Cuts the snap-in
 /// feel that go_router's default transitions have on iOS Material routes.
@@ -39,16 +40,54 @@ CustomTransitionPage<T> _slideFade<T>({required Widget child, required GoRouterS
   );
 }
 
+/// Crossfade for bottom-nav tab switches — pushing a slide transition would
+/// look like a back-stack pop, which is misleading.
+CustomTransitionPage<T> _fade<T>({required Widget child, required GoRouterState state}) {
+  return CustomTransitionPage<T>(
+    key: state.pageKey,
+    child: child,
+    transitionDuration: const Duration(milliseconds: 180),
+    reverseTransitionDuration: const Duration(milliseconds: 160),
+    transitionsBuilder: (_, animation, __, child) =>
+        FadeTransition(opacity: animation, child: child),
+  );
+}
+
+final _rootNavigatorKey = GlobalKey<NavigatorState>();
+
 final appRouter = GoRouter(
+  navigatorKey: _rootNavigatorKey,
   initialLocation: '/',
   routes: [
-    GoRoute(
-      path: '/',
-      // Home stays as the root with the default no-op transition.
-      builder: (c, s) => const HomeScreen(),
+    // ── Shell: bottom nav over three branches ──────────────────────────
+    StatefulShellRoute.indexedStack(
+      builder: (context, state, shell) => MainShell(shell: shell),
+      branches: [
+        StatefulShellBranch(routes: [
+          GoRoute(
+            path: '/',
+            pageBuilder: (c, s) => _fade(state: s, child: const HomeScreen()),
+          ),
+        ]),
+        StatefulShellBranch(routes: [
+          GoRoute(
+            path: '/watchlist',
+            pageBuilder: (c, s) => _fade(state: s, child: const WatchlistScreen()),
+          ),
+        ]),
+        StatefulShellBranch(routes: [
+          GoRoute(
+            path: '/settings',
+            pageBuilder: (c, s) => _fade(state: s, child: const SettingsScreen()),
+          ),
+        ]),
+      ],
     ),
+
+    // ── Full-screen routes pushed over the shell ────────────────────────
     GoRoute(
       path: '/leagues/:leagueId/fixtures',
+      parentNavigatorKey: _rootNavigatorKey,
       pageBuilder: (c, s) {
         final id = int.parse(s.pathParameters['leagueId']!);
         final name = (s.extra as String?) ?? 'League';
@@ -57,6 +96,7 @@ final appRouter = GoRouter(
     ),
     GoRoute(
       path: '/match/:fixtureId',
+      parentNavigatorKey: _rootNavigatorKey,
       pageBuilder: (c, s) {
         final id = int.parse(s.pathParameters['fixtureId']!);
         final hint = s.extra as FixtureDto?;
@@ -65,6 +105,7 @@ final appRouter = GoRouter(
     ),
     GoRoute(
       path: '/team/:teamId/squad',
+      parentNavigatorKey: _rootNavigatorKey,
       pageBuilder: (c, s) {
         final teamId = int.parse(s.pathParameters['teamId']!);
         final q = s.uri.queryParameters;
@@ -81,6 +122,7 @@ final appRouter = GoRouter(
     ),
     GoRoute(
       path: '/player/:playerId',
+      parentNavigatorKey: _rootNavigatorKey,
       pageBuilder: (c, s) {
         final id = int.parse(s.pathParameters['playerId']!);
         final q = s.uri.queryParameters;
@@ -98,10 +140,12 @@ final appRouter = GoRouter(
     ),
     GoRoute(
       path: '/referees',
+      parentNavigatorKey: _rootNavigatorKey,
       pageBuilder: (c, s) => _slideFade(state: s, child: const RefereeSearchScreen()),
     ),
     GoRoute(
       path: '/referee/:refereeId',
+      parentNavigatorKey: _rootNavigatorKey,
       pageBuilder: (c, s) {
         final id = int.parse(s.pathParameters['refereeId']!);
         final q = s.uri.queryParameters;
@@ -117,19 +161,13 @@ final appRouter = GoRouter(
     ),
     GoRoute(
       path: '/login',
+      parentNavigatorKey: _rootNavigatorKey,
       pageBuilder: (c, s) => _slideFade(state: s, child: const LoginScreen()),
     ),
     GoRoute(
       path: '/paywall',
+      parentNavigatorKey: _rootNavigatorKey,
       pageBuilder: (c, s) => _slideFade(state: s, child: const PaywallScreen()),
-    ),
-    GoRoute(
-      path: '/watchlist',
-      pageBuilder: (c, s) => _slideFade(state: s, child: const WatchlistScreen()),
-    ),
-    GoRoute(
-      path: '/settings',
-      pageBuilder: (c, s) => _slideFade(state: s, child: const SettingsScreen()),
     ),
   ],
 );

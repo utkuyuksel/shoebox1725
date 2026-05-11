@@ -6,8 +6,6 @@ import 'package:go_router/go_router.dart';
 import '../../../app/theme.dart';
 import '../../../core/widgets/async_view.dart';
 import '../../../core/widgets/skeleton.dart';
-import '../../auth/state/auth_provider.dart';
-import '../../paywall/state/premium_provider.dart';
 import '../data/league_dto.dart';
 import '../data/leagues_repository.dart';
 import 'widgets/country_tile.dart';
@@ -48,42 +46,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             tooltip: 'Referees',
             onPressed: () => context.push('/referees'),
           ),
-          IconButton(
-            icon: const Icon(Icons.bookmark_outline_rounded),
-            tooltip: 'Watchlist',
-            onPressed: () => context.push('/watchlist'),
-          ),
-          Builder(builder: (context) {
-            final signedIn = ref.watch(isSignedInProvider);
-            final isPremium = ref.watch(isPremiumProvider);
-            return IconButton(
-              icon: Stack(
-                clipBehavior: Clip.none,
-                children: [
-                  Icon(signedIn
-                      ? Icons.person_rounded
-                      : Icons.person_outline_rounded),
-                  if (isPremium)
-                    Positioned(
-                      right: -3,
-                      top: -3,
-                      child: Container(
-                        width: 9,
-                        height: 9,
-                        decoration: BoxDecoration(
-                          color: ShoeboxColors.warn,
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                              color: ShoeboxColors.navy, width: 1.5),
-                        ),
-                      ),
-                    ),
-                ],
-              ),
-              tooltip: 'Settings',
-              onPressed: () => context.push('/settings'),
-            );
-          }),
         ],
       ),
       body: RefreshIndicator(
