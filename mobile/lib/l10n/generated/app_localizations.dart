@@ -528,6 +528,42 @@ abstract class AppLocalizations {
   /// **'Unlock with {tier}'**
   String paywallGateLabel(String tier);
 
+  /// No description provided for @paywallSheetTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Unlock this section'**
+  String get paywallSheetTitle;
+
+  /// No description provided for @paywallSheetBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Watch a short ad to open it for this match, or upgrade for unlimited access.'**
+  String get paywallSheetBody;
+
+  /// No description provided for @paywallWatchAdTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Watch a 30-second ad'**
+  String get paywallWatchAdTitle;
+
+  /// No description provided for @paywallWatchAdSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Unlocks this section for this match'**
+  String get paywallWatchAdSubtitle;
+
+  /// No description provided for @paywallUpgradeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Upgrade to Premium'**
+  String get paywallUpgradeTitle;
+
+  /// No description provided for @paywallUpgradeSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Unlimited access, no ads'**
+  String get paywallUpgradeSubtitle;
+
   /// No description provided for @commonCancel.
   ///
   /// In en, this message translates to:

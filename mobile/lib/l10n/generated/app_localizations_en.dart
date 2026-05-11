@@ -252,6 +252,25 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get paywallSheetTitle => 'Unlock this section';
+
+  @override
+  String get paywallSheetBody =>
+      'Watch a short ad to open it for this match, or upgrade for unlimited access.';
+
+  @override
+  String get paywallWatchAdTitle => 'Watch a 30-second ad';
+
+  @override
+  String get paywallWatchAdSubtitle => 'Unlocks this section for this match';
+
+  @override
+  String get paywallUpgradeTitle => 'Upgrade to Premium';
+
+  @override
+  String get paywallUpgradeSubtitle => 'Unlimited access, no ads';
+
+  @override
   String get commonCancel => 'Cancel';
 
   @override

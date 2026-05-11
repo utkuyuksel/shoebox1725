@@ -252,6 +252,25 @@ class AppLocalizationsTr extends AppLocalizations {
   }
 
   @override
+  String get paywallSheetTitle => 'Bu bölümü aç';
+
+  @override
+  String get paywallSheetBody =>
+      'Bu maç için kısa bir reklam izle, ya da sınırsız erişim için yükselt.';
+
+  @override
+  String get paywallWatchAdTitle => '30 saniyelik reklam izle';
+
+  @override
+  String get paywallWatchAdSubtitle => 'Bu maçta bu bölümü açar';
+
+  @override
+  String get paywallUpgradeTitle => 'Premium\'a yükselt';
+
+  @override
+  String get paywallUpgradeSubtitle => 'Sınırsız erişim, reklamsız';
+
+  @override
   String get commonCancel => 'İptal';
 
   @override

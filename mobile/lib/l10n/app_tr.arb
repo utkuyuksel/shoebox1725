@@ -79,6 +79,12 @@
   "paywallNothingToRestore": "Geri yüklenecek bir şey yok.",
   "paywallLegal": "Abonelikler iptal edilene dek otomatik yenilenir. App Store veya Play Store'dan yönet.",
   "paywallGateLabel": "{tier} ile aç",
+  "paywallSheetTitle": "Bu bölümü aç",
+  "paywallSheetBody": "Bu maç için kısa bir reklam izle, ya da sınırsız erişim için yükselt.",
+  "paywallWatchAdTitle": "30 saniyelik reklam izle",
+  "paywallWatchAdSubtitle": "Bu maçta bu bölümü açar",
+  "paywallUpgradeTitle": "Premium'a yükselt",
+  "paywallUpgradeSubtitle": "Sınırsız erişim, reklamsız",
 
   "commonCancel": "İptal",
   "commonClose": "Kapat",

@@ -45,4 +45,36 @@ class AppEnv {
   /// Entitlement identifier used in RevenueCat dashboard. Anything in this
   /// entitlement unlocks the premium tier app-wide.
   static const premiumEntitlement = 'premium';
+
+  // AdMob ad unit IDs. The defaults are Google's official TEST IDs — every
+  // call returns a test ad without billing anyone. Override at build time
+  // once real AdMob units exist:
+  //   --dart-define=ADMOB_REWARDED_IOS=ca-app-pub-XXXX/XXXX
+  //   --dart-define=ADMOB_REWARDED_ANDROID=ca-app-pub-XXXX/XXXX
+  static const _testRewardedIos = 'ca-app-pub-3940256099942544/1712485313';
+  static const _testRewardedAndroid = 'ca-app-pub-3940256099942544/5224354917';
+
+  static const _rewardedIos = String.fromEnvironment(
+    'ADMOB_REWARDED_IOS',
+    defaultValue: _testRewardedIos,
+  );
+  static const _rewardedAndroid = String.fromEnvironment(
+    'ADMOB_REWARDED_ANDROID',
+    defaultValue: _testRewardedAndroid,
+  );
+
+  /// Platform-correct rewarded ad unit. Falls back to test units when no
+  /// real `ADMOB_REWARDED_*` override is provided at build time.
+  static String get rewardedAdUnitId {
+    try {
+      if (Platform.isIOS) return _rewardedIos;
+      if (Platform.isAndroid) return _rewardedAndroid;
+    } catch (_) {}
+    return _rewardedIos;
+  }
+
+  /// How long an ad-unlocked feature stays open after a successful ad view.
+  /// Refreshed on every successful ad — so a user who watches one ad for a
+  /// match keeps access until they restart the app (in-memory store).
+  static const adUnlockSessionOnly = true;
 }

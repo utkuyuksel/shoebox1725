@@ -1,9 +1,11 @@
+import 'dart:async';
 import 'dart:io' show Platform;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -12,6 +14,7 @@ import 'app/env.dart';
 import 'app/locale_provider.dart';
 import 'app/router.dart';
 import 'app/theme.dart';
+import 'features/paywall/data/ads_repository.dart';
 import 'features/paywall/data/billing_repository.dart';
 import 'features/paywall/state/premium_provider.dart';
 import 'l10n/generated/app_localizations.dart';
@@ -46,12 +49,29 @@ Future<void> main() async {
   // try/catch so a transient configure failure doesn't block app boot.
   await _configureRevenueCat();
 
+  // AdMob — fire and forget. We only need init to complete *before* the
+  // first ad load (which is user-triggered, not on boot), so unawaited is
+  // fine. Failures are non-fatal: AdsRepository.markReady stays false and
+  // the rewarded-ad path is a no-op.
+  unawaited(_configureAdMob());
+
   runApp(ProviderScope(
     overrides: [
       sharedPreferencesProvider.overrideWithValue(prefs),
     ],
     child: const ShoeboxApp(),
   ));
+}
+
+Future<void> _configureAdMob() async {
+  try {
+    final isMobile = !kIsWeb && (Platform.isIOS || Platform.isAndroid);
+    if (!isMobile) return;
+    await MobileAds.instance.initialize();
+    AdsRepository.markReady();
+  } catch (e) {
+    debugPrint('AdMob initialize failed: $e');
+  }
 }
 
 Future<void> _configureRevenueCat() async {

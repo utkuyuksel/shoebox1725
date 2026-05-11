@@ -79,6 +79,12 @@
   "paywallNothingToRestore": "Nada que restaurar.",
   "paywallLegal": "Las suscripciones se renuevan automáticamente hasta su cancelación. Gestiona desde App Store o Play Store.",
   "paywallGateLabel": "Desbloquear con {tier}",
+  "paywallSheetTitle": "Desbloquea esta sección",
+  "paywallSheetBody": "Mira un anuncio corto para abrirla en este partido, o mejora para acceso ilimitado.",
+  "paywallWatchAdTitle": "Ver un anuncio de 30 segundos",
+  "paywallWatchAdSubtitle": "Desbloquea esta sección en este partido",
+  "paywallUpgradeTitle": "Mejora a Premium",
+  "paywallUpgradeSubtitle": "Acceso ilimitado, sin anuncios",
 
   "commonCancel": "Cancelar",
   "commonClose": "Cerrar",

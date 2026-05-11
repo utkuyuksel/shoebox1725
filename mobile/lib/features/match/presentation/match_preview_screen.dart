@@ -119,6 +119,7 @@ class _Body extends StatelessWidget {
                 if (preview.fixture.isFootball) ...[
                   const SizedBox(height: 12),
                   PremiumGate(
+                    featureKey: 'match:${preview.fixture.id}:hit_rates',
                     child: HitRateCard(
                       home: preview.homeSeasonHr,
                       away: preview.awaySeasonHr,
@@ -131,6 +132,7 @@ class _Body extends StatelessWidget {
                           preview.splits!.awayTeamAway != null)) ...[
                     const SizedBox(height: 12),
                     PremiumGate(
+                      featureKey: 'match:${preview.fixture.id}:splits',
                       child: _SplitsCard(
                           splits: preview.splits!,
                           homeLabel: homeLabel,

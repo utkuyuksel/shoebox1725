@@ -56,5 +56,18 @@
 		<true/>
 		<key>UIStatusBarHidden</key>
 		<false/>
+		<!-- Google AdMob — using Google's official TEST app ID so the SDK
+		     can load test ads in development without a real AdMob account.
+		     Replace with the real ca-app-pub-XXXXXXXX~XXXXXXXX before submitting
+		     to the App Store. -->
+		<key>GADApplicationIdentifier</key>
+		<string>ca-app-pub-3940256099942544~1458002511</string>
+		<key>SKAdNetworkItems</key>
+		<array>
+			<dict>
+				<key>SKAdNetworkIdentifier</key>
+				<string>cstr6suwn9.skadnetwork</string>
+			</dict>
+		</array>
 	</dict>
 </plist>

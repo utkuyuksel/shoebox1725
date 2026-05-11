@@ -86,6 +86,12 @@
   "paywallLegal": "Subscriptions renew automatically until cancelled. Manage in the App Store or Play Store.",
   "paywallGateLabel": "Unlock with {tier}",
   "@paywallGateLabel": { "placeholders": { "tier": { "type": "String" } } },
+  "paywallSheetTitle": "Unlock this section",
+  "paywallSheetBody": "Watch a short ad to open it for this match, or upgrade for unlimited access.",
+  "paywallWatchAdTitle": "Watch a 30-second ad",
+  "paywallWatchAdSubtitle": "Unlocks this section for this match",
+  "paywallUpgradeTitle": "Upgrade to Premium",
+  "paywallUpgradeSubtitle": "Unlimited access, no ads",
 
   "commonCancel": "Cancel",
   "commonClose": "Close",

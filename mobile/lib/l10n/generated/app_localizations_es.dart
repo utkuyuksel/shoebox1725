@@ -254,6 +254,26 @@ class AppLocalizationsEs extends AppLocalizations {
   }
 
   @override
+  String get paywallSheetTitle => 'Desbloquea esta sección';
+
+  @override
+  String get paywallSheetBody =>
+      'Mira un anuncio corto para abrirla en este partido, o mejora para acceso ilimitado.';
+
+  @override
+  String get paywallWatchAdTitle => 'Ver un anuncio de 30 segundos';
+
+  @override
+  String get paywallWatchAdSubtitle =>
+      'Desbloquea esta sección en este partido';
+
+  @override
+  String get paywallUpgradeTitle => 'Mejora a Premium';
+
+  @override
+  String get paywallUpgradeSubtitle => 'Acceso ilimitado, sin anuncios';
+
+  @override
   String get commonCancel => 'Cancelar';
 
   @override
