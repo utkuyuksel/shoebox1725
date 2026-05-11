@@ -12,6 +12,11 @@ Thumbs.db
 .env.*.local
 !.env.example
 
+# Production infra secrets and TLS material — created on the VPS, never local.
+infra/.env
+infra/nginx/letsencrypt/
+infra/nginx/certbot-www/
+
 # Telegram bot has its bot token hardcoded in config.py.
 # We exclude it; ship a config.example.py instead.
 telegram-bot/config.py

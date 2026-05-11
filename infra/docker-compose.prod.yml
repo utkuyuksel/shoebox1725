@@ -1,0 +1,110 @@
+# Full production stack — runs on a single VPS via:
+#
+#   cd infra
+#   docker compose -f docker-compose.prod.yml up -d
+#
+# What it spins up:
+#   - nginx        (host:80, 443) — reverse proxy + SSL termination, talks
+#                  to certbot for Let's Encrypt renewal
+#   - api          (internal:8000) — FastAPI in the image we build from
+#                  ../backend. Container talks to postgres + redis by name
+#                  on the internal `shoebox` network.
+#   - postgres     (internal:5432) — same image as dev. Volume-mounted.
+#   - redis        (internal:6379) — appendonly persistence.
+#   - certbot      (one-shot) — runs renewals on a cron; see
+#                  `docs/vps-deploy.md` for the initial cert request.
+#
+# Secrets live in `infra/.env` (not committed). See `.env.example`.
+
+services:
+  nginx:
+    image: nginx:1.27-alpine
+    container_name: shoebox-nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d:ro
+      - ./nginx/letsencrypt:/etc/letsencrypt:ro
+      - ./nginx/certbot-www:/var/www/certbot:ro
+    depends_on:
+      api:
+        condition: service_healthy
+    networks:
+      - shoebox
+
+  api:
+    build:
+      context: ../backend
+      dockerfile: Dockerfile
+    image: shoebox-api:latest
+    container_name: shoebox-api
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      # Override the dev-localhost defaults with internal service names.
+      DATABASE_URL: postgresql+asyncpg://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-shoebox_db}
+      REDIS_URL: redis://redis:6379/0
+      ENV: prod
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - shoebox
+    # No exposed ports — nginx is the only thing that talks to it.
+
+  postgres:
+    image: postgres:16
+    container_name: shoebox-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB:-shoebox_db}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ../backend/app/db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres} -d ${POSTGRES_DB:-shoebox_db}"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    networks:
+      - shoebox
+
+  redis:
+    image: redis:7-alpine
+    container_name: shoebox-redis
+    restart: unless-stopped
+    command: ["redis-server", "--appendonly", "yes", "--maxmemory", "256mb", "--maxmemory-policy", "allkeys-lru"]
+    volumes:
+      - redisdata:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    networks:
+      - shoebox
+
+  certbot:
+    image: certbot/certbot:latest
+    container_name: shoebox-certbot
+    # One-shot renewal loop. Run the initial cert issue manually — see docs.
+    entrypoint: /bin/sh -c "trap exit TERM; while :; do certbot renew --webroot --webroot-path=/var/www/certbot; sleep 12h & wait $${!}; done"
+    volumes:
+      - ./nginx/letsencrypt:/etc/letsencrypt
+      - ./nginx/certbot-www:/var/www/certbot
+    networks:
+      - shoebox
+
+volumes:
+  pgdata:
+  redisdata:
+
+networks:
+  shoebox:
+    name: shoebox-net
