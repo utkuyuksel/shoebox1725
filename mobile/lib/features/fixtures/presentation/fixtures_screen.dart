@@ -75,9 +75,10 @@ class _FixturesList extends StatelessWidget {
           match: m,
           dayFmt: dayFmt,
           timeFmt: timeFmt,
-          onTap: m.isUpcoming
-              ? () => context.push('/match/${m.id}', extra: m)
-              : null,
+          // Every match (upcoming, live, finished) opens the preview — the
+          // preview screen handles missing-data cases gracefully and historical
+          // referee + squad + score context is still useful post-match.
+          onTap: () => context.push('/match/${m.id}', extra: m),
         );
       },
     );
