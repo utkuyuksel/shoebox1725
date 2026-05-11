@@ -1,17 +1,35 @@
 import 'dart:io' show Platform;
 
-/// Resolves the backend base URL at build time / runtime.
+/// Build-time / runtime configuration.
 ///
-/// - Override at run time via:
-///     flutter run --dart-define=API_BASE_URL=https://api.shoebox.app
-/// - Otherwise we pick the right localhost-equivalent per platform:
-///   iOS sim and macOS desktop see the host as 127.0.0.1; Android emulator
-///   sees it as 10.0.2.2. Web and others fall back to 127.0.0.1.
+/// Values can be overridden at run time with:
+///   flutter run --dart-define=API_BASE_URL=https://api.shoebox.app \
+///               --dart-define=SUPABASE_URL=... \
+///               --dart-define=SUPABASE_ANON_KEY=... \
+///               --dart-define=REVENUECAT_SDK_KEY=...
+///
+/// The defaults below match our dev Supabase + RevenueCat projects. The
+/// Supabase anon key and RevenueCat SDK key are *publishable* by design —
+/// they're meant to ship inside the client. Supabase RLS and RevenueCat's
+/// server-side enforcement keep the real authorisation in the backend.
 class AppEnv {
-  static const _override = String.fromEnvironment('API_BASE_URL');
+  static const _apiOverride = String.fromEnvironment('API_BASE_URL');
+  static const _supabaseUrl = String.fromEnvironment(
+    'SUPABASE_URL',
+    defaultValue: 'https://rfccwixwkkifrmbnetjp.supabase.co',
+  );
+  static const _supabaseAnonKey = String.fromEnvironment(
+    'SUPABASE_ANON_KEY',
+    defaultValue:
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJmY2N3aXh3a2tpZnJtYm5ldGpwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg1MTA0OTIsImV4cCI6MjA5NDA4NjQ5Mn0.ZEOXKJ7gNo5SFN-5RAEkyWwigfVgyD0WcGHCs_p7WGc',
+  );
+  static const _revenueCatKey = String.fromEnvironment(
+    'REVENUECAT_SDK_KEY',
+    defaultValue: 'test_iKMYaaCRGMWMzdZILRgbHLSdRQX',
+  );
 
   static String get apiBaseUrl {
-    if (_override.isNotEmpty) return _override;
+    if (_apiOverride.isNotEmpty) return _apiOverride;
     try {
       if (Platform.isAndroid) return 'http://10.0.2.2:8000';
     } catch (_) {
@@ -19,4 +37,12 @@ class AppEnv {
     }
     return 'http://127.0.0.1:8000';
   }
+
+  static String get supabaseUrl => _supabaseUrl;
+  static String get supabaseAnonKey => _supabaseAnonKey;
+  static String get revenueCatSdkKey => _revenueCatKey;
+
+  /// Entitlement identifier used in RevenueCat dashboard. Anything in this
+  /// entitlement unlocks the premium tier app-wide.
+  static const premiumEntitlement = 'premium';
 }

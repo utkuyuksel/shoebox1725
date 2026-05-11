@@ -2,14 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 
+import '../features/auth/presentation/login_screen.dart';
 import '../features/fixtures/data/fixture_dto.dart';
 import '../features/fixtures/presentation/fixtures_screen.dart';
 import '../features/leagues/presentation/home_screen.dart';
 import '../features/match/presentation/match_preview_screen.dart';
+import '../features/paywall/presentation/paywall_screen.dart';
 import '../features/player/presentation/player_detail_screen.dart';
 import '../features/referee/presentation/referee_profile_screen.dart';
 import '../features/referee/presentation/referee_search_screen.dart';
+import '../features/settings/presentation/settings_screen.dart';
 import '../features/squad/presentation/squad_screen.dart';
+import '../features/watchlist/presentation/watchlist_screen.dart';
 
 /// Smooth slide-from-right + fade for every pushed route. Cuts the snap-in
 /// feel that go_router's default transitions have on iOS Material routes.
@@ -110,6 +114,22 @@ final appRouter = GoRouter(
           ),
         );
       },
+    ),
+    GoRoute(
+      path: '/login',
+      pageBuilder: (c, s) => _slideFade(state: s, child: const LoginScreen()),
+    ),
+    GoRoute(
+      path: '/paywall',
+      pageBuilder: (c, s) => _slideFade(state: s, child: const PaywallScreen()),
+    ),
+    GoRoute(
+      path: '/watchlist',
+      pageBuilder: (c, s) => _slideFade(state: s, child: const WatchlistScreen()),
+    ),
+    GoRoute(
+      path: '/settings',
+      pageBuilder: (c, s) => _slideFade(state: s, child: const SettingsScreen()),
     ),
   ],
 );

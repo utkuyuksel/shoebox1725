@@ -8,6 +8,7 @@ import '../../../app/theme.dart';
 import '../../../core/widgets/async_view.dart';
 import '../../../core/widgets/skeleton.dart';
 import '../../../core/widgets/team_logo.dart';
+import '../../watchlist/presentation/watchlist_star_button.dart';
 import '../data/fixture_dto.dart';
 import '../data/fixtures_repository.dart';
 
@@ -131,7 +132,14 @@ class _FixtureCard extends StatelessWidget {
                         letterSpacing: 0.6,
                       ),
                     ),
-                    _StatusBadge(match: match),
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        _StatusBadge(match: match),
+                        const SizedBox(width: 6),
+                        WatchlistStarButton(fixtureId: match.id, size: 18),
+                      ],
+                    ),
                   ],
                 ),
                 const SizedBox(height: 10),

@@ -7,6 +7,8 @@ import '../../../app/theme.dart';
 import '../../../core/widgets/async_view.dart';
 import '../../../core/widgets/skeleton.dart';
 import '../../fixtures/data/fixture_dto.dart';
+import '../../paywall/presentation/widgets/premium_gate.dart';
+import '../../watchlist/presentation/watchlist_star_button.dart';
 import '../data/match_preview_dto.dart';
 import '../data/match_repository.dart';
 import 'widgets/basketball_averages_card.dart';
@@ -28,7 +30,17 @@ class MatchPreviewScreen extends ConsumerWidget {
     final preview = ref.watch(matchPreviewProvider(fixtureId));
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Match preview')),
+      appBar: AppBar(
+        title: const Text('Match preview'),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 6),
+            child: Center(
+              child: WatchlistStarButton(fixtureId: fixtureId, size: 24),
+            ),
+          ),
+        ],
+      ),
       body: AsyncView<MatchPreviewDto>(
         value: preview,
         onRetry: () => ref.invalidate(matchPreviewProvider(fixtureId)),
@@ -106,17 +118,24 @@ class _Body extends StatelessWidget {
                 // ── Football-only sections ────────────────────────────────────
                 if (preview.fixture.isFootball) ...[
                   const SizedBox(height: 12),
-                  HitRateCard(
-                    home: preview.homeSeasonHr,
-                    away: preview.awaySeasonHr,
-                    homeLabel: homeLabel,
-                    awayLabel: awayLabel,
+                  PremiumGate(
+                    child: HitRateCard(
+                      home: preview.homeSeasonHr,
+                      away: preview.awaySeasonHr,
+                      homeLabel: homeLabel,
+                      awayLabel: awayLabel,
+                    ),
                   ),
                   if (preview.splits != null &&
                       (preview.splits!.homeTeamAtHome != null ||
                           preview.splits!.awayTeamAway != null)) ...[
                     const SizedBox(height: 12),
-                    _SplitsCard(splits: preview.splits!, homeLabel: homeLabel, awayLabel: awayLabel),
+                    PremiumGate(
+                      child: _SplitsCard(
+                          splits: preview.splits!,
+                          homeLabel: homeLabel,
+                          awayLabel: awayLabel),
+                    ),
                   ],
                 ],
 
