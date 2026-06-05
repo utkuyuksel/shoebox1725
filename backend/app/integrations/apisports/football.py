@@ -40,10 +40,13 @@ class FootballClient(APISportsClient):
             params["last"] = last
         return await self.get("fixtures", params)
 
-    async def h2h(self, team_a: int, team_b: int, last: int = 10) -> Optional[list[dict]]:
-        return await self.get("fixtures/headtohead", {
-            "h2h": f"{team_a}-{team_b}", "last": last,
-        })
+    async def h2h(self, team_a: int, team_b: int, last: int | None = None) -> Optional[list[dict]]:
+        # NB: the `last` parameter requires a paid api-sports plan. Omit it by
+        # default and slice client-side — the plain call returns full history.
+        params: dict = {"h2h": f"{team_a}-{team_b}"}
+        if last:
+            params["last"] = last
+        return await self.get("fixtures/headtohead", params)
 
     async def squad(self, team_id: int) -> Optional[list[dict]]:
         return await self.get("players/squads", {"team": team_id})

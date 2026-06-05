@@ -14,6 +14,7 @@ import '../features/referee/presentation/referee_profile_screen.dart';
 import '../features/referee/presentation/referee_search_screen.dart';
 import '../features/settings/presentation/settings_screen.dart';
 import '../features/squad/presentation/squad_screen.dart';
+import '../features/standings/presentation/standings_screen.dart';
 import '../features/watchlist/presentation/watchlist_screen.dart';
 import 'main_shell.dart';
 
@@ -112,6 +113,15 @@ final appRouter = GoRouter(
         final id = int.parse(s.pathParameters['leagueId']!);
         final name = (s.extra as String?) ?? 'League';
         return _slideFade(state: s, child: FixturesScreen(leagueId: id, leagueName: name));
+      },
+    ),
+    GoRoute(
+      path: '/leagues/:leagueId/standings',
+      parentNavigatorKey: _rootNavigatorKey,
+      pageBuilder: (c, s) {
+        final id = int.parse(s.pathParameters['leagueId']!);
+        final name = (s.extra as String?) ?? (s.uri.queryParameters['name'] ?? 'Standings');
+        return _slideFade(state: s, child: StandingsScreen(leagueId: id, leagueName: name));
       },
     ),
     GoRoute(

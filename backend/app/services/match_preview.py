@@ -23,6 +23,7 @@ from app.db.models import (
 )
 from app.services.insights.generator import TrendInput, generate_insights
 from app.services.referee.team_history import compute_referee_team_history
+from app.services.stats.h2h import compute_h2h
 from app.services.stats.hit_rate import compute_football_hit_rates
 from app.services.stats.radar import basketball_radar, football_radar
 from app.services.stats.trends import basketball_trend_series, football_trend_series
@@ -69,6 +70,8 @@ async def _build_football(db: AsyncSession, fx: Fixture, home: Team, away: Team)
 
     radar = await football_radar(db, fx.home_team_id, fx.away_team_id, fx.league_id, fx.season_year)
 
+    h2h = await compute_h2h(db, fx.home_team_id, fx.away_team_id, "football")
+
     referee_team_home = None
     referee_team_away = None
     if referee:
@@ -109,6 +112,7 @@ async def _build_football(db: AsyncSession, fx: Fixture, home: Team, away: Team)
             "away_season": _football_hr_payload(away_hr),
         },
         "radar": {"axes": radar.axes, "home": radar.home, "away": radar.away},
+        "h2h": _h2h_payload(h2h),
         "trends": {
             "home": [_trend_payload(t) for t in home_trends],
             "away": [_trend_payload(t) for t in away_trends],
@@ -144,6 +148,8 @@ async def _build_basketball(db: AsyncSession, fx: Fixture, home: Team, away: Tea
 
     radar = await basketball_radar(db, fx.home_team_id, fx.away_team_id, fx.league_id, fx.season_year)
 
+    h2h = await compute_h2h(db, fx.home_team_id, fx.away_team_id, "basketball")
+
     return {
         "fixture": _fixture_payload(fx, sport="basketball"),
         "home": _basketball_team_payload(home, home_stats),
@@ -152,6 +158,7 @@ async def _build_basketball(db: AsyncSession, fx: Fixture, home: Team, away: Tea
         "splits": None,
         "hit_rates": None,
         "radar": {"axes": radar.axes, "home": radar.home, "away": radar.away},
+        "h2h": _h2h_payload(h2h),
         "trends": {
             "home": [_trend_payload(t) for t in home_trends],
             "away": [_trend_payload(t) for t in away_trends],
@@ -298,6 +305,28 @@ def _football_hr_payload(hr) -> dict:
         "corners_over_105": hr.corners_over_105_pct,
         "cards_over_35": hr.cards_over_35_pct,
         "cards_over_45": hr.cards_over_45_pct,
+    }
+
+
+def _h2h_payload(h) -> Optional[dict]:
+    if h is None or h.matches == 0:
+        return None
+    return {
+        "matches": h.matches,
+        "home_wins": h.home_wins,
+        "away_wins": h.away_wins,
+        "draws": h.draws,
+        "avg_total": h.avg_total,
+        "meetings": [
+            {
+                "date": m.date,
+                "home_team_id": m.home_team_id,
+                "away_team_id": m.away_team_id,
+                "home_goals": m.home_goals,
+                "away_goals": m.away_goals,
+            }
+            for m in h.meetings
+        ],
     }
 
 

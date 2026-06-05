@@ -117,6 +117,18 @@
   "matchSectionRadar": "Form fingerprint",
   "matchSectionReferee": "Referee · history",
   "matchRefereeNoHistory": "No history",
+  "matchSectionH2H": "Head to head",
+  "matchH2HEmpty": "No previous meetings",
+  "matchH2HAvgTotal": "Avg total",
+  "standingsTitle": "Standings",
+  "standingsEmpty": "No standings available yet.",
+  "standingsTeam": "Team",
+  "standingsPlayedShort": "P",
+  "standingsGoalDiffShort": "GD",
+  "standingsPointsShort": "Pts",
+  "standingsWinPctShort": "Win%",
+  "standingsWinLossShort": "W-L",
+  "standingsForm": "Form",
   "matchTrendCardTitle": "{teamLabel} · last {n} matches",
   "@matchTrendCardTitle": {
     "placeholders": {

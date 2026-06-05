@@ -86,6 +86,10 @@ def k_fixtures(league_id: int, season: int, scope: str = "current_round") -> str
     return f"fixtures:{league_id}:{season}:{scope}"
 
 
+def k_standings(league_id: int, season: Optional[int]) -> str:
+    return f"standings:{league_id}:{season if season is not None else 'latest'}"
+
+
 def k_match_preview(fixture_id: int) -> str:
     return f"match_preview:{fixture_id}"
 

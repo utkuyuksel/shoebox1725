@@ -340,6 +340,42 @@ class AppLocalizationsEn extends AppLocalizations {
   String get matchRefereeNoHistory => 'No history';
 
   @override
+  String get matchSectionH2H => 'Head to head';
+
+  @override
+  String get matchH2HEmpty => 'No previous meetings';
+
+  @override
+  String get matchH2HAvgTotal => 'Avg total';
+
+  @override
+  String get standingsTitle => 'Standings';
+
+  @override
+  String get standingsEmpty => 'No standings available yet.';
+
+  @override
+  String get standingsTeam => 'Team';
+
+  @override
+  String get standingsPlayedShort => 'P';
+
+  @override
+  String get standingsGoalDiffShort => 'GD';
+
+  @override
+  String get standingsPointsShort => 'Pts';
+
+  @override
+  String get standingsWinPctShort => 'Win%';
+
+  @override
+  String get standingsWinLossShort => 'W-L';
+
+  @override
+  String get standingsForm => 'Form';
+
+  @override
   String matchTrendCardTitle(String teamLabel, int n) {
     return '$teamLabel · last $n matches';
   }

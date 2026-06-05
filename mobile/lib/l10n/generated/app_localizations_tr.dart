@@ -340,6 +340,42 @@ class AppLocalizationsTr extends AppLocalizations {
   String get matchRefereeNoHistory => 'Geçmiş yok';
 
   @override
+  String get matchSectionH2H => 'Karşılıklı maçlar';
+
+  @override
+  String get matchH2HEmpty => 'Önceki karşılaşma yok';
+
+  @override
+  String get matchH2HAvgTotal => 'Ortalama toplam';
+
+  @override
+  String get standingsTitle => 'Puan durumu';
+
+  @override
+  String get standingsEmpty => 'Henüz puan durumu yok.';
+
+  @override
+  String get standingsTeam => 'Takım';
+
+  @override
+  String get standingsPlayedShort => 'O';
+
+  @override
+  String get standingsGoalDiffShort => 'AV';
+
+  @override
+  String get standingsPointsShort => 'P';
+
+  @override
+  String get standingsWinPctShort => 'G%';
+
+  @override
+  String get standingsWinLossShort => 'G-M';
+
+  @override
+  String get standingsForm => 'Form';
+
+  @override
   String matchTrendCardTitle(String teamLabel, int n) {
     return '$teamLabel · son $n maç';
   }

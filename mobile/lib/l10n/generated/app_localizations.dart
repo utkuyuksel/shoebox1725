@@ -696,6 +696,78 @@ abstract class AppLocalizations {
   /// **'No history'**
   String get matchRefereeNoHistory;
 
+  /// No description provided for @matchSectionH2H.
+  ///
+  /// In en, this message translates to:
+  /// **'Head to head'**
+  String get matchSectionH2H;
+
+  /// No description provided for @matchH2HEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No previous meetings'**
+  String get matchH2HEmpty;
+
+  /// No description provided for @matchH2HAvgTotal.
+  ///
+  /// In en, this message translates to:
+  /// **'Avg total'**
+  String get matchH2HAvgTotal;
+
+  /// No description provided for @standingsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Standings'**
+  String get standingsTitle;
+
+  /// No description provided for @standingsEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No standings available yet.'**
+  String get standingsEmpty;
+
+  /// No description provided for @standingsTeam.
+  ///
+  /// In en, this message translates to:
+  /// **'Team'**
+  String get standingsTeam;
+
+  /// No description provided for @standingsPlayedShort.
+  ///
+  /// In en, this message translates to:
+  /// **'P'**
+  String get standingsPlayedShort;
+
+  /// No description provided for @standingsGoalDiffShort.
+  ///
+  /// In en, this message translates to:
+  /// **'GD'**
+  String get standingsGoalDiffShort;
+
+  /// No description provided for @standingsPointsShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Pts'**
+  String get standingsPointsShort;
+
+  /// No description provided for @standingsWinPctShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Win%'**
+  String get standingsWinPctShort;
+
+  /// No description provided for @standingsWinLossShort.
+  ///
+  /// In en, this message translates to:
+  /// **'W-L'**
+  String get standingsWinLossShort;
+
+  /// No description provided for @standingsForm.
+  ///
+  /// In en, this message translates to:
+  /// **'Form'**
+  String get standingsForm;
+
   /// No description provided for @matchTrendCardTitle.
   ///
   /// In en, this message translates to:

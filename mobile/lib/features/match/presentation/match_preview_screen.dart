@@ -12,6 +12,7 @@ import '../../watchlist/presentation/watchlist_star_button.dart';
 import '../data/match_preview_dto.dart';
 import '../data/match_repository.dart';
 import 'widgets/basketball_averages_card.dart';
+import 'widgets/h2h_card.dart';
 import 'widgets/hit_rate_card.dart';
 import 'widgets/insights_strip.dart';
 import 'widgets/match_header.dart';
@@ -114,6 +115,18 @@ class _Body extends StatelessWidget {
                     homeLabel: homeLabel,
                     awayLabel: awayLabel,
                   ),
+
+                // ── Head-to-head (both sports) ────────────────────────────────
+                if (preview.h2h != null && preview.h2h!.matches > 0) ...[
+                  const SizedBox(height: 12),
+                  H2HCard(
+                    h2h: preview.h2h!,
+                    homeId: preview.home.id,
+                    awayId: preview.away.id,
+                    homeLabel: homeLabel,
+                    awayLabel: awayLabel,
+                  ),
+                ],
 
                 // ── Football-only sections ────────────────────────────────────
                 if (preview.fixture.isFootball) ...[

@@ -8,6 +8,7 @@ import '../../../app/theme.dart';
 import '../../../core/widgets/async_view.dart';
 import '../../../core/widgets/skeleton.dart';
 import '../../../core/widgets/team_logo.dart';
+import '../../../l10n/generated/app_localizations.dart';
 import '../../watchlist/presentation/watchlist_star_button.dart';
 import '../data/fixture_dto.dart';
 import '../data/fixtures_repository.dart';
@@ -21,7 +22,19 @@ class FixturesScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final fixtures = ref.watch(fixturesProvider(leagueId));
     return Scaffold(
-      appBar: AppBar(title: Text(leagueName)),
+      appBar: AppBar(
+        title: Text(leagueName),
+        actions: [
+          IconButton(
+            tooltip: AppLocalizations.of(context).standingsTitle,
+            icon: const Icon(Icons.format_list_numbered_rounded),
+            onPressed: () => context.push(
+              '/leagues/$leagueId/standings',
+              extra: leagueName,
+            ),
+          ),
+        ],
+      ),
       body: RefreshIndicator(
         color: ShoeboxColors.accent,
         backgroundColor: ShoeboxColors.surface,

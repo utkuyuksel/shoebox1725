@@ -361,6 +361,60 @@ class RefereeVsTeamDto {
       );
 }
 
+/// One historical meeting between the two teams. Scores are goals (football)
+/// or points (basketball); `homeTeamId` is whoever hosted *that* meeting.
+class H2HMeetingDto {
+  final String date;
+  final int homeTeamId;
+  final int awayTeamId;
+  final int? homeGoals;
+  final int? awayGoals;
+  const H2HMeetingDto({
+    required this.date,
+    required this.homeTeamId,
+    required this.awayTeamId,
+    required this.homeGoals,
+    required this.awayGoals,
+  });
+
+  factory H2HMeetingDto.fromJson(Map<String, dynamic> j) => H2HMeetingDto(
+        date: j['date'] as String,
+        homeTeamId: j['home_team_id'] as int,
+        awayTeamId: j['away_team_id'] as int,
+        homeGoals: _asInt(j['home_goals']),
+        awayGoals: _asInt(j['away_goals']),
+      );
+}
+
+class H2HDto {
+  final int matches;
+  final int homeWins;     // fixture's home team
+  final int awayWins;     // fixture's away team
+  final int draws;
+  final double? avgTotal;
+  final List<H2HMeetingDto> meetings;
+  const H2HDto({
+    required this.matches,
+    required this.homeWins,
+    required this.awayWins,
+    required this.draws,
+    required this.avgTotal,
+    required this.meetings,
+  });
+
+  factory H2HDto.fromJson(Map<String, dynamic> j) => H2HDto(
+        matches: (j['matches'] ?? 0) as int,
+        homeWins: (j['home_wins'] ?? 0) as int,
+        awayWins: (j['away_wins'] ?? 0) as int,
+        draws: (j['draws'] ?? 0) as int,
+        avgTotal: _asDouble(j['avg_total']),
+        meetings: ((j['meetings'] as List?) ?? const [])
+            .cast<Map<String, dynamic>>()
+            .map(H2HMeetingDto.fromJson)
+            .toList(),
+      );
+}
+
 class InsightDto {
   final String rule;
   final int severity;
@@ -407,6 +461,7 @@ class MatchPreviewDto {
   final HitRatesDto? homeSeasonHr;
   final HitRatesDto? awaySeasonHr;
   final RadarDto? radar;
+  final H2HDto? h2h;
   final List<TrendSeriesDto> trendsHome;
   final List<TrendSeriesDto> trendsAway;
   final RefereeBlockDto? referee;
@@ -420,6 +475,7 @@ class MatchPreviewDto {
     required this.homeSeasonHr,
     required this.awaySeasonHr,
     required this.radar,
+    required this.h2h,
     required this.trendsHome,
     required this.trendsAway,
     required this.referee,
@@ -447,6 +503,9 @@ class MatchPreviewDto {
       radar: j['radar'] == null
           ? null
           : RadarDto.fromJson((j['radar'] as Map).cast<String, dynamic>()),
+      h2h: j['h2h'] == null
+          ? null
+          : H2HDto.fromJson((j['h2h'] as Map).cast<String, dynamic>()),
       trendsHome: parseTrends(trends['home']),
       trendsAway: parseTrends(trends['away']),
       referee: j['referee'] == null
